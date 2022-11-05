@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-const uri: string = 'mongodb://127.0.0.1:27017/local';
+const uri: string = 'mongodb+srv://XTrak:ByPBTVGTTWipqDEQ@cluster0.fxpwhwv.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.connect(uri, (err: any) =>{
     if (err){
