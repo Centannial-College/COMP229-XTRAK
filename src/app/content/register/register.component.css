@@ -41,6 +41,13 @@ border-radius: 10px;
 margin-left:5px;
 margin-bottom:10px;
 }
+.form-select{
+    width: 50%;
+    height: 40px;
+    border-radius: 10px;
+    margin-left:160px;
+    margin-bottom:10px;
+}
 .userIcon{
     margin-left: 50px;
     width:5px;
