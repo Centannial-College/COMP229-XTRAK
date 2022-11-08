@@ -1,30 +1,45 @@
 
-.registerWindow{
-    text-align: center;
-	min-width: 430px;
-	height: 80%;
- 	width: 45%;
-	border:solid;
-	border-radius: 20px;
-	margin-top:20px;
-	backdrop-filter: blur(9px);
-    float:left;
+.main{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
 }
 
-span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
+.left {
+    position: relative;
+    margin-top: 30px;
+    width:576px;
+    height: 324px;
+    text-align:center;
+     height: 700px;
+     border: 3px solid black;
+     border-radius:20px;
+     background-color:#C8B1E4;
+     margin-bottom:40px;
+}
+
+.right {
+padding-top:7%;
+    position: relative;
+    min-width:576px;
+    max-width: 700px;
+    height: 324px;
+    font-size:40px;
+    text-align:center;
+}
+
+@media screen and (min-width:1152px){
+  .main {
+      justify-content: space-between;
   }
-.infoStatement{
-    margin-right: 10px;
-    padding: 20px;
-    min-width: 430px;
-    float:left;
-    text-align: center;
-    width: 45%;
-    height: 80%;
-    font-size: large;
+
+  .left {
+      order:2;
+  }
+
+  .right {
+      order:1;
+  }
 }
 
 .input-group{
