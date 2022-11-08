@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+//Don't show when not logged in
+isLoggedIn = false;
+showIncidentList = false;
+username? : string;
+
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  logout(): void {
+    
+  }
 }

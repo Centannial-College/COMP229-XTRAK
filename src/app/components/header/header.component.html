@@ -1,22 +1,31 @@
 <nav>
     <ul>
+        <li><img src="../../../assets/logo.png" width = "60px" height = "50px" onclick=""></li>
       <li>
-          <a href="home">Home</a>
+          <a href="" routerLinkActive = "active" aria-current="page" routerLink="">Home</a>
       </li>
       <li>
-          <a href="">+Incident</a>
+          <a href="add-incident" routerLinkActive = "active" aria-current="page"routerLink="/add-incident">+Incident</a>
       </li>
       <li>
-          <a href="incident">List</a>
+          <a href="list" routerLinkActive = "active" aria-current="page" routerLink="/list">List</a>
       </li>
+      <ng-container *ngIF="true else showLoginTemplate">
+    <a class="nav-item">
+<a class="nav-link" (click)="logout()">Logout</a>
+    </a>
+        </ng-container>
+        <ng-template #showLoginTemplate>
+        </ng-template>
       <li>
-          <a href="">About</a>
+          <a href="about" routerLinkActive = "active" aria-current="page" routerLink="/about">About</a>
       </li>
+      <!--
       <li>
-          <a href="contact">Contact</a>
-      </li>
+          <a href="contact" routerLinkActive = "active" aria-current="page">Contact</a>
+      </li>-->
       <li>
-        <a href="login">Login</a>
+        <a href="login" routerLinkActive = "active" aria-current="page" routerLink="/login">Login</a>
         </li>
     </ul>
   </nav>

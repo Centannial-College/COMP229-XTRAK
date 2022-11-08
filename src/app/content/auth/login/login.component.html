@@ -1,0 +1,56 @@
+<div class="loginWindow">
+
+                <h1 class="display-4">Login</h1>
+
+                <div id="messageArea" class="alert alert-danger" *ngIf="isLoginFailed">
+                    {{ errorMessage }}
+                </div>
+               
+                <form  class = "loginForm" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+    
+               
+                        <i class="userIcon">
+                        </i>
+   
+                      <input type="text" class="form-inputs" id="username" name="username"  
+                       [(ngModel)]="form.username" #username="ngModel"  placeholder="Enter your username" required>
+                    <div 
+                        class="alert alert-danger" 
+                        role="alert"
+                        *ngIf="username.errors?.['required'] && f.submitted">
+
+                        Username is required!
+                
+                    </div>
+                  
+  
+  
+
+
+                        <i class="userIcon">
+                        </i>
+                      
+                      <input type="password" class="form-inputs" required
+                      [(ngModel)]="form.password" #password="ngModel" placeholder="Enter your password">
+                    <div class="alert alert-danger" role="alert" *ngIf="password.errors?.['required'] && f.submitted">
+                    
+                        Password is required!
+                    
+                    </div>
+
+                  
+                                            
+                  <div class="buttonsArea">
+                    <button id="loginButton" type="submit" class="btn-lg">
+                      <i class="fas fa-sign-in-alt"></i> Login</button>
+                      <button id="cancelButton" type="reset" class="btn-lg">
+                        <i class="fas fa-undo"></i> Cancel</button>
+                  </div>
+                </form>
+              
+            
+            <p class="text-center text-muted small">
+              Don't have an account? 
+              <a class="link" href="/register">Register Here!</a>
+            </p>
+          </div>
