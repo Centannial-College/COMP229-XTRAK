@@ -2,16 +2,17 @@
 <div class="main">
 
             <div class = "right">
-            <b>xTack</b> is the latest tool for <u>incident reports</u> that allows your company to function at full speed!
+            <b>xTrack</b> is the latest tool for <u>incident reports</u> that allows your company to function at full speed!
             </div>
 
           <div class="left" >
 
               <h1>Sign Up</h1>
-            <!-- Message Area -->
+              <!--<div id="messageArea" class="alert alert-danger">
 
+              </div>-->
 
-              <form method="POST" id="registerForm" novalidate>
+              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
                 <p class="hint-text">Create your own account. It's free!</p>
 
                 <div class="form-group">
