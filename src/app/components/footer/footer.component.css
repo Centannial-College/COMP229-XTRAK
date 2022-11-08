@@ -1,15 +1,16 @@
 .footer {
     text-align: center;
-    height: 50px;
+    height: 35px;
     font-size: 20px;
     color: white;
     padding: 8px 0;
-    background: #2F184B; /* Old browsers */
+    background: #2F184B;
+    /* Old browsers */
     background: -moz-linear-gradient(top,
-    #DC2F02 0%, #2F184B 100%);
-    min-width:33.3%;
-	margin-left: -8px;
-    width:100vw;
+            #C8B1E4 0%, #2F184B 100%);
+    min-width: 33.3%;
+    margin-left: -8px;
+    width: 100vw;
     position: fixed;
     bottom: 0;
 }
