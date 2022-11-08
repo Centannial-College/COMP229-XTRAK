@@ -1,4 +1,16 @@
 # XTrak
+COLOURS: 
+Black = #03071E
+Maroon = #370617
+Dark Red = #6A040F
+Med Red = #9D0208
+Red = #D00000
+Red/Rng = #DC2F02
+Rng = #DC2F02
+Light Rng = #F48C06
+Yellow/Rng = #FAA307
+Yellow = #FFBA08
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
 
