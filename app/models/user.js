@@ -8,7 +8,8 @@ const UserSchema = new Schema({
     username: String,
     emailAddress: String,
     firstName: String,
-    lastName: String
+    lastName: String,
+    userType: String
 },{
     timestamps:true,
     collection: 'users'
