@@ -1,7 +1,7 @@
 {
-  "name": "w3",
-  "version": "0.0.1",
-  "description": "comp229 week6",
+  "name": "xTrack",
+  "version": "0.0.0",
+  "description": "Incident Reporting & Tracking",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "node server.js",
     "dev": "nodemon"
   },
-  "author": "daniilv-me",
+  "author": "xTrack",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
