@@ -1,33 +1,34 @@
-import movieModel from '../models/movies.js';
+import incidentModel from '../models/incident.js';
 
 import { UserDisplayName } from '../utils/index.js';
 
 export function DisplayIncidentList(req, res, next){
-    movieModel.find(function(err, moviesCollection) {
+    incidentModel.find(function(err, incidentCollection) {
         if(err){
             console.error(err);
             res.end(err);
         }
 
-        res.render('index', {title: 'Incident List', page: 'incident/list', movies: moviesCollection, displayName: UserDisplayName(req)});
+        res.render('index', {title: 'Incident List', page: 'incident/list', incident: incidentCollection, displayName: UserDisplayName(req)});
     })
 }
 
 export function DisplayIncidentAddPage(req, res, next){
-    res.render('index', { title: 'Add Incident', page: 'incident/edit', movie: {}, displayName: UserDisplayName(req) });
+    res.render('index', { title: 'Add Incident', page: 'incident/edit', incident: {}, displayName: UserDisplayName(req) });
 }
 
 export function ProcessIncidentAddPage(req, res, next){
     
-    let newMovie = movieModel({
-        name: req.body.name,
-        year: req.body.year,
-        director: req.body.director,
-        genre: req.body.genre,
-        runtime: req.body.runtime
+    let newIncident = IncidentModel({
+        description: req.body.description,
+        priority: req.body.priority,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        emailAddress: req.body.emailAddress,
+        phoneNumber: req.body.phoneNumber
     });
 
-    movieModel.create(newMovie, (err, Movie) => {
+    incidentModel.create(newIncident, (err, Incident) => {
         if(err){
             console.error(err);
             res.end(err);
@@ -40,13 +41,13 @@ export function ProcessIncidentAddPage(req, res, next){
 export function DisplayIncidentEditPage(req, res, next){
     let id = req.params.id;
 
-    movieModel.findById(id, (err, movie) => {
+    incidentModel.findById(id, (err, incident) => {
         if(err){
             console.error(err);
             res.end(err);
         }
 
-        res.render('index', { title: 'Edit Incident', page: 'incident/edit', movie: movie, displayName: UserDisplayName(req) });
+        res.render('index', { title: 'Edit Incident', page: 'incident/edit', incident: incident, displayName: UserDisplayName(req) });
     });    
 }
 
@@ -54,16 +55,17 @@ export function ProcessIncidentEditPage(req, res, next){
 
     let id = req.params.id;
     
-    let newMovie = movieModel({
+    let newIncident = incidentModel({
         _id: req.body.id,
-        name: req.body.name,
-        year: req.body.year,
-        director: req.body.director,
-        genre: req.body.genre,
-        runtime: req.body.runtime
+        description: req.body.description,
+        priority: req.body.priority,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        emailAddress: req.body.emailAddress,
+        phoneNumber: req.body.phoneNumber
     });
 
-    movieModel.updateOne({_id: id }, newMovie, (err, Movie) => {
+    incidentModel.updateOne({_id: id }, newIncident, (err, Incident) => {
         if(err){
             console.error(err);
             res.end(err);
@@ -76,7 +78,7 @@ export function ProcessIncidentEditPage(req, res, next){
 export function ProcessIncidentDelete(req, res, next){
     let id = req.params.id;
 
-    movieModel.remove({_id: id}, (err) => {
+    incidentModel.remove({_id: id}, (err) => {
         if (err){
             console.error(err);
             res.end(err);

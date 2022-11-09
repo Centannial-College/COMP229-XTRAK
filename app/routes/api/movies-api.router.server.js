@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Add, Delete, Edit, Get, GetList } from "../../controllers/api/movies-api.controller.server.js";
+import { Add, Delete, Edit, Get, GetList } from "../../controllers/api/incident-api.controller.server.js";
 
 const router = Router();
 
