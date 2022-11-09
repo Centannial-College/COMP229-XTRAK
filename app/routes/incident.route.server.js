@@ -12,7 +12,7 @@ import { AuthGuard } from "../utils/index.js";
 const router = Router();
 
 //list all incidents
-router.get('/incident-list', DisplayIncidentList);
+router.get('/incident-list', AuthGuard, DisplayIncidentList);
 
 //add and processes the new database item 
 router.get('/incident-add', AuthGuard,  DisplayIncidentAddPage);
