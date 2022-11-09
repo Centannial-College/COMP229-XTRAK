@@ -2,6 +2,7 @@ import incidentModel from '../models/incident.js';
 
 import { UserDisplayName } from '../utils/index.js';
 
+//gets all incidents in database
 export function DisplayIncidentList(req, res, next){
     incidentModel.find(function(err, incidentCollection) {
         if(err){
@@ -13,10 +14,12 @@ export function DisplayIncidentList(req, res, next){
     })
 }
 
+//displays page to add new item to database
 export function DisplayIncidentAddPage(req, res, next){
     res.render('index', { title: 'Add Incident', page: 'incident/edit', incident: {}, displayName: UserDisplayName(req) });
 }
 
+//process information to the database
 export function ProcessIncidentAddPage(req, res, next){
     
     let newIncident = incidentModel({
@@ -38,6 +41,7 @@ export function ProcessIncidentAddPage(req, res, next){
     } )
 }
 
+//edit current item in database with the id 
 export function DisplayIncidentEditPage(req, res, next){
     let id = req.params.id;
 
@@ -51,6 +55,8 @@ export function DisplayIncidentEditPage(req, res, next){
     });    
 }
 
+
+//processes the information from the edit page
 export function ProcessIncidentEditPage(req, res, next){
 
     let id = req.params.id;
@@ -75,6 +81,7 @@ export function ProcessIncidentEditPage(req, res, next){
     } )
 }
 
+//processes deletion of item in database
 export function ProcessIncidentDelete(req, res, next){
     let id = req.params.id;
 
