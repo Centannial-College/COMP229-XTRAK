@@ -19,7 +19,7 @@ export function DisplayIncidentAddPage(req, res, next){
 
 export function ProcessIncidentAddPage(req, res, next){
     
-    let newIncident = IncidentModel({
+    let newIncident = incidentModel({
         description: req.body.description,
         priority: req.body.priority,
         firstName: req.body.firstName,

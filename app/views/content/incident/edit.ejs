@@ -4,63 +4,79 @@
             <h1><%= title %></h1>
 
             <form class="form" method="POST">
-                <input type="hidden" name="id" value="<%= movie._id %>" >
+                <input type="hidden" name="id" value="<%= incident._id %>" >
                 <div class="form-group">
-                    <label for="nameTextField">Movie Title</label>
+                    <label for="nameTextField">Incident Description</label>
                     <input type="text" class="form-control"
                     id="nameTextField"
-                    placeholder="Enter the Movie Title"
-                    name="name" 
-                    value="<%= movie.name %>"
+                    placeholder="Enter the description"
+                    name="description" 
+                    value="<%= incident.description %>"
                     required>
                 </div>
 
                 <div class="form-group">
-                    <label for="authorTextField">Year</label>
-                    <input type="number" class="form-control"
-                    id="authorTextField"
-                    placeholder="Enter the Release Year"
-                    name="year" 
-                    value="<%= movie.year %>"
-                    required>
-                </div>
-
-                <div class="form-group">
-                    <label for="publishedTextField">Director</label>
+                    <label for="publishedTextField">priority</label>
                     <input type="text" class="form-control"
                     id="publishedTextField"
-                    placeholder="Enter the Director's Name"
-                    name="director" 
-                    value="<%= movie.director %>"
+                    placeholder="Enter the first Name"
+                    name="priority" 
+                    value="<%= incident.priority %>"
+                    required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="publishedTextField">First Name</label>
+                    <input type="text" class="form-control"
+                    id="publishedTextField"
+                    placeholder="Enter the first Name"
+                    name="firstName" 
+                    value="<%= incident.firstName %>"
                     required>
                 </div>
 
                 <div class="form-group">
-                    <label for="descriptionTextArea">Genre</label>
+                    <label for="descriptionTextArea">Last Name</label>
                     <input type="text" class="form-control"
                     id="descriptionTextArea"
                     placeholder="Enter the Movie genre"
-                    name="genre"                     
-                    value="<%= movie.genre %>"
+                    name="lastName"                     
+                    value="<%= incident.lastName %>"
                     required
                     >
                     </input>
                 </div>
 
                 <div class="form-group">
-                    <label for="priceTextField">Runtime (in minutes)</label>
-                    <input type="number" class="form-control"
-                    id="priceTextField"
-                    placeholder="Enter the Movie's Runtime in Minutes"
-                    name="runtime" 
-                    value="<%= movie.runtime %>"
-                    required>
+                    <label for="descriptionTextArea">emailAddress</label>
+                    <input type="text" class="form-control"
+                    id="descriptionTextArea"
+                    placeholder="Enter the emailAddress"
+                    name="emailAddress"                     
+                    value="<%= incident.emailAddress %>"
+                    required
+                    >
+                    </input>
                 </div>
+
+                <div class="form-group">
+                    <label for="descriptionTextArea">phoneNumber</label>
+                    <input type="text" class="form-control"
+                    id="descriptionTextArea"
+                    placeholder="Enter the phoneNumber"
+                    name="phoneNumber"                     
+                    value="<%= incident.phoneNumber %>"
+                    required
+                    >
+                    </input>
+                </div>
+                
 
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-edit"></i> Submit</button>
                 
-                    <a href="/movie-list" class="btn btn-warning">
+                    <a href="/incident-list" class="btn btn-warning">
                         <i class="fas fa-undo"></i> Cancel</a>
 
             </form>
