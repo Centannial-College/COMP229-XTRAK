@@ -1,8 +1,12 @@
-<div class="container">
-    <div class="row">
-      <div class="offset-md-3 col-md-6 col-sm-12">
-            <div class="login" id="contentArea">
-                <h1 class="display-4">Register</h1>
+<div class ="container-bottom"></div>
+<div class="container-fluid">
+  <div class="infoStatement">
+  <b>xTack</b> is the latest tool for <u>incident reports</u> that allows your company to function at full speed!
+</div>
+<br>
+<div class="container-reg shadow p-3 mb-5 bg-body rounded"> 
+          
+                <h1 class="display-4">Sign Up</h1>
   
               <!-- Message Area -->
               <% if(messages.length > 0) { %>
@@ -13,7 +17,13 @@
   
                 <form method="POST" id="registerForm" novalidate>
                   <p class="hint-text">Create your own account. It's free and only takes a minute.</p>
-  
+                  
+                  <select class="form-select">
+                    <option selected>User Type</option>
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                  </select>
+
                   <div class="form-group">
                     <div class="row">
                       <p class="lead"><i class="fas fa-user-shield"></i> Personal Information</p>
@@ -71,11 +81,14 @@
                   </div>
                 </form>
               
-            </div>
+            
             <p class="text-center text-muted small">
               Already have an account? 
               <a class="link" href="/login">Sign in</a>
             </p>
-      </div>
-    </div>
-  </div>
+          </div>
+          <div class ="container-bottom"></div>
+</div>
+</div>
+<br><br>
+
