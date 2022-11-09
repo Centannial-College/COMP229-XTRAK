@@ -32,7 +32,9 @@ export function processLogin(req, res, next){
                     id: user._id,
                     displayName: user.displayName,
                     username: user.username,
-                    emailAddress: user.emailAddress
+                    emailAddress: user.emailAddress,
+                    firstName: user.firstName,
+                    lastName: user.lastName
                 },
                 token: authToken
             })
