@@ -4,6 +4,7 @@ import { displayAboutPage,
 
 const router = Router();
 
+//Routes to home and about page
 router.get('/', displayHomePage);
 router.get('/home', displayHomePage);
 router.get('/about', displayAboutPage);

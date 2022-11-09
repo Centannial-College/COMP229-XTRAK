@@ -41,11 +41,15 @@ margin-bottom:20px;
     border-radius: 15px;
   }
   .container-bottom{
-    height:100px;
+    height:65px;
   }
   .start-50{
     border-radius: 15px;
     background-color: white;
+    min-width: 450px;
+  }
+  .min-width{
+min-width:750px;
   }
 
   .container-reg{

@@ -1,13 +1,13 @@
 
 <div class="container-fluid" style="background-color: #8938F7; height: 100%">  
-    <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-75">
+    <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-75 min-width">
         <h3 class="text-center">Incident List</h3>
         <hr>
         <!-- Table with values from database -->
         <table class="table table-striped table-hover">
             <thead class="table-striped">
                 <tr>
-                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Record Number</th>
                     <th scope="col" class="text-center">Description</th>
                     <th scope="col" class="text-center">Priority</th>
                     <th scope="col" class="text-center">First Name</th>
@@ -24,15 +24,15 @@
                  <% for(let count = 0; count < incident.length; count++) { %>
                      <tr>
                         <th scope="row" class="text-center"><%= count + 1 %></th>
-                            <td><%= incident[count].description %></td>
-                            <td><%= incident[count].priority %></td>
-                            <td><%= incident[count].firstName %></td>
-                            <td><%= incident[count].lastName %></td>
-                            <td><%= incident[count].emailAddress %></td>
-                            <td><%= incident[count].phoneNumber %></td>
+                            <td class="text-center"><%= incident[count].description %></td>
+                            <td class="text-center"><%= incident[count].priority %></td>
+                            <td class="text-center"><%= incident[count].firstName %></td>
+                            <td class="text-center"><%= incident[count].lastName %></td>
+                            <td class="text-center"><%= incident[count].emailAddress %></td>
+                            <td class="text-center"><%= incident[count].phoneNumber %></td>
                          <% if(displayName) { %>
                          <td class="text-center col-1">
-                             <a href="/incident-add/<%= incident[count]._id %>"
+                             <a href="/incident-edit/<%= incident[count]._id %>"
                                  class="btn btn-outline-dark btn-sm">
                                  <i class="fas fa-pencil-alt"></i> Edit</a>
                          </td>                      
