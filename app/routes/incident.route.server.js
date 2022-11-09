@@ -4,7 +4,8 @@ import { DisplayIncidentList,
     DisplayIncidentAddPage, 
     ProcessIncidentAddPage, 
     ProcessIncidentEditPage, 
-    DisplayIncidentEditPage} from "../controllers/incident.controller.server.js";
+    DisplayIncidentEditPage,
+    ProcessIncidentDelete} from "../controllers/incident.controller.server.js";
 
 import { AuthGuard } from "../utils/index.js";
 
@@ -22,6 +23,6 @@ router.post('/incident-edit/:id', AuthGuard, ProcessIncidentEditPage);
 router.get('/incident-edit/:id', AuthGuard, DisplayIncidentEditPage);
 
 //deletes item from database
-router.get('/incident-delete/:id', AuthGuard, ProcessIncidentEditPage);
+router.get('/incident-delete/:id', AuthGuard, ProcessIncidentDelete);
 
 export default router;
