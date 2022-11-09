@@ -12,7 +12,7 @@ font-size: large;
     text-align: center;
   }
   .img-fluid{
-    min-width: 800px;
+    min-width: 600px;
   }
   .flexbox{
     display: grid;

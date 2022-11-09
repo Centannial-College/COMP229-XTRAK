@@ -56,7 +56,8 @@ export function ProcessRegisterPage(req, res, next){
     let newUser = new User({
         username: req.body.username,
         emailAddress: req.body.emailAddress,
-        displayName: req.body.firstName + " " + req.body.lastName
+        displayName: req.body.firstName + " " + req.body.lastName,
+        userType: req.body.userType
     });
 
     User.register(newUser, req.body.password, function(err){
@@ -91,3 +92,7 @@ export function ProcessLogoutPage(req, res, next){
 
     res.redirect('/login');
 }
+
+export function displayProfilePage(req, res, next){
+    res.render('index', { title: 'Profile', page: 'profile', displayName: UserDisplayName(req)} );
+};

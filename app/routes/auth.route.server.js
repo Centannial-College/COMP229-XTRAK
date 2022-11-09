@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import { DisplayLoginPage, 
+    displayProfilePage, 
     DisplayRegisterPage, 
     ProcessLoginPage,
     ProcessLogoutPage,
@@ -20,5 +21,7 @@ router.post('/register', ProcessRegisterPage);
 
 // Process Logout Page
 router.get('/logout', ProcessLogoutPage);
+
+router.get('/profile', displayProfilePage);
 
 export default router;
