@@ -2,22 +2,22 @@ import movieModel from '../models/movies.js';
 
 import { UserDisplayName } from '../utils/index.js';
 
-export function DisplayMoviesList(req, res, next){
+export function DisplayIncidentList(req, res, next){
     movieModel.find(function(err, moviesCollection) {
         if(err){
             console.error(err);
             res.end(err);
         }
 
-        res.render('index', {title: 'Movie List', page: 'movies/list', movies: moviesCollection, displayName: UserDisplayName(req)});
+        res.render('index', {title: 'Incident List', page: 'incident/list', movies: moviesCollection, displayName: UserDisplayName(req)});
     })
 }
 
-export function DisplayMoviesAddPage(req, res, next){
-    res.render('index', { title: 'Add Movie', page: 'movies/edit', movie: {}, displayName: UserDisplayName(req) });
+export function DisplayIncidentAddPage(req, res, next){
+    res.render('index', { title: 'Add Incident', page: 'incident/edit', movie: {}, displayName: UserDisplayName(req) });
 }
 
-export function ProcessMoviesAddPage(req, res, next){
+export function ProcessIncidentAddPage(req, res, next){
     
     let newMovie = movieModel({
         name: req.body.name,
@@ -33,11 +33,11 @@ export function ProcessMoviesAddPage(req, res, next){
             res.end(err);
         };
 
-        res.redirect('/movie-list')
+        res.redirect('/incident-list')
     } )
 }
 
-export function DisplayMoviesEditPage(req, res, next){
+export function DisplayIncidentEditPage(req, res, next){
     let id = req.params.id;
 
     movieModel.findById(id, (err, movie) => {
@@ -46,11 +46,11 @@ export function DisplayMoviesEditPage(req, res, next){
             res.end(err);
         }
 
-        res.render('index', { title: 'Edit Movie', page: 'movies/edit', movie: movie, displayName: UserDisplayName(req) });
+        res.render('index', { title: 'Edit Incident', page: 'incident/edit', movie: movie, displayName: UserDisplayName(req) });
     });    
 }
 
-export function ProcessMoviesEditPage(req, res, next){
+export function ProcessIncidentEditPage(req, res, next){
 
     let id = req.params.id;
     
@@ -69,11 +69,11 @@ export function ProcessMoviesEditPage(req, res, next){
             res.end(err);
         };
 
-        res.redirect('/movie-list')
+        res.redirect('/incident-list')
     } )
 }
 
-export function ProcessMoviesDelete(req, res, next){
+export function ProcessIncidentDelete(req, res, next){
     let id = req.params.id;
 
     movieModel.remove({_id: id}, (err) => {
@@ -82,7 +82,7 @@ export function ProcessMoviesDelete(req, res, next){
             res.end(err);
         }
 
-        res.redirect('/movie-list');
+        res.redirect('/incident-list');
     })
 }
 
