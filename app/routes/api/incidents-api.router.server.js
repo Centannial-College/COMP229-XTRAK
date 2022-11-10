@@ -1,5 +1,5 @@
 /*
-File: index.route.server.js
+File: incidents-api.router.server.js
 Date: 10.11.2022
 
 NAME: xTrak - Incident Reporting
@@ -14,14 +14,14 @@ Danill Velykyi - 301183618
 Cathy Da - 301177731 
 */
 import { Router } from "express";
-import { displayAboutPage,
-    displayHomePage } from "../controllers/index.controller.server.js";
+import { Add, Delete, Edit, Get, GetList } from "../../controllers/api/incident-api.controller.server.js";
 
 const router = Router();
 
-//Routes to home and about page
-router.get('/', displayHomePage);
-router.get('/home', displayHomePage);
-router.get('/about', displayAboutPage);
+router.get('/list', GetList);
+router.get('/:id', Get);
+router.post('/add', Add);
+router.put('/edit/:id', Edit);
+router.delete('/delete/:id', Delete);
 
 export default router;
