@@ -19,10 +19,17 @@ export function DisplayIncidentAddPage(req, res, next){
     res.render('index', { title: 'Add Incident', page: 'incident/edit', incident: {}, displayName: UserDisplayName(req) });
 }
 
+    let currentDate = new Date();
+    let day = currentDate.getDate().toString();
+    let month = (currentDate.getMonth() + 1).toString();
+    let year = currentDate.getFullYear().toString();
+    let newTicketNumber = day + month + year + "-00000";
+
 //process information to the database
 export function ProcessIncidentAddPage(req, res, next){
     
     let newIncident = incidentModel({
+        recordNumber: newTicketNumber,
         description: req.body.description,
         priority: req.body.priority,
         firstName: req.body.firstName,
@@ -54,7 +61,6 @@ export function DisplayIncidentEditPage(req, res, next){
         res.render('index', { title: 'Edit Incident', page: 'incident/edit', incident: incident, displayName: UserDisplayName(req) });
     });    
 }
-
 
 //processes the information from the edit page
 export function ProcessIncidentEditPage(req, res, next){

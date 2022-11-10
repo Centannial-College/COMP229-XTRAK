@@ -14,6 +14,8 @@
           <a class="nav-link <%= (page == 'about') ? 'active' : ''; %>" aria-current="page" href="/about"><i class="fa-solid fa-circle-info fa-lg"></i> About</a>
         </li>
 
+        
+
         <% if(displayName) { %>
 
           <li class="nav-item">
@@ -31,10 +33,10 @@
                 </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" aria-current="page" href="/logout"><i class="fa-solid fa-right-from-bracket fa-lg"></i> Logout</a>
+                  <a class="dropdown-item" aria-current="page" href="/profile"><i class="fa-solid fa-gear fa-lg"></i> Profile</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" aria-current="page" href="/profile"><i class="fa-solid fa-gear fa-lg"></i> Profile</a>
+                  <a class="dropdown-item" aria-current="page" href="/logout"><i class="fa-solid fa-right-from-bracket fa-lg"></i> Logout</a>
                 </li>
               </ul>
             </div>
@@ -42,22 +44,8 @@
 
         <% } else { %>
           <li class="nav-item">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-circle-user fa-lg"></i> Account
-              </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" aria-current="page" href="/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i> Login</a>
-              </li>
-            </ul>
-          </div>
-          </li>
+            <a class="nav-link <%= (page == 'login') ? 'active' : ''; %>" aria-current="page" href="/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i> Login</a>
+          </li> 
         <% } %>
       </ul>
     </div>
