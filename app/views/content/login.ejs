@@ -1,0 +1,48 @@
+<!--
+File: login.ejs
+Date: 10.11.2022
+
+NAME: xTrak - Incident Reporting
+Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
+
+---- DEVELOPERS ----
+Tim Upton – 301259058 
+Pedro Da Silva Dergado – 301239283 
+Alex Damovski – 301192233 
+Tyler Mercier – STUDENT NUM 
+Danill Velykyi - 301183618
+Cathy Da - 301177731 
+-->
+<div class="container-fluid" style="background-color: #8938F7; height: 100%">  
+  <div class="position-absolute top-50 start-50 translate-middle bg-light p-5">
+      <h3 class="text-center">Login Form</h3>
+      <hr>
+      <% if(messages.length > 0) { %>
+          <div id="messageArea" class="text-center alert alert-danger">
+          <%= messages %>
+        </div>
+        <% } %>
+      <!-- Form login -->
+      <form method="POST" id="loginForm">
+          <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                  <input type="text" id="username" name="username" class="form-control" placeholder="admin" required>                
+              </div>
+              <label for="password" class="form-label">Password</label>
+              <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"></i></span>
+                  <input type="password" id="password" name="password" class="form-control" placeholder="admin" required>
+              </div>
+          </div>
+          <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-outline-dark">Submit</button>
+              <button type="reset" class="btn btn-outline-danger" type="reset">Reset</button>
+          </div>
+          <p class="text-center text-muted small">
+            Don't have an account? 
+            <a class="link" href="/register">Register Here!</a>
+      </form>
+  </div>
+</div>

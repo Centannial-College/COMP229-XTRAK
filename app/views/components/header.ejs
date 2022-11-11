@@ -1,0 +1,68 @@
+<!--
+File: header.ejs
+Date: 10.11.2022
+
+NAME: xTrak - Incident Reporting
+Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
+
+---- DEVELOPERS ----
+Tim Upton – 301259058 
+Pedro Da Silva Dergado – 301239283 
+Alex Damovski – 301192233 
+Tyler Mercier – STUDENT NUM 
+Danill Velykyi - 301183618
+Cathy Da - 301177731 
+-->
+<nav class="navbar navbar-expand-lg fixed-top shadow shadow-offset-down-lg" style="background-color: white">
+  <div class="container">
+    <a href="/"><img src="./content/images/logo.png" width="60" height="50" class="d-inline-block align-top" alt=""></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link <%= (page == 'home') ? 'active' : ''; %>" aria-current="page" href="/home"><i class="fa-solid fa-house-signal fa-lg"></i> Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link <%= (page == 'about') ? 'active' : ''; %>" aria-current="page" href="/about"><i class="fa-solid fa-circle-info fa-lg"></i> About</a>
+        </li>
+
+        
+
+        <% if(displayName) { %>
+
+          <li class="nav-item">
+            <a class="nav-link <%= (page == 'incident-list') ? 'active' : ''; %>" aria-current="page" href="/incident-list"><i class="fa-solid fa-table-list fa-lg"></i> Incident List</a>
+          </li> 
+          <li class="nav-item">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-circle-user fa-lg"></i> Account
+                </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" aria-current="page" href="/profile"><i class="fa-solid fa-gear fa-lg"></i> Profile</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" aria-current="page" href="/logout"><i class="fa-solid fa-right-from-bracket fa-lg"></i> Logout</a>
+                </li>
+              </ul>
+            </div>
+            </li>
+
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link <%= (page == 'login') ? 'active' : ''; %>" aria-current="page" href="/login"><i class="fa-solid fa-right-to-bracket fa-lg"></i> Login</a>
+          </li> 
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
