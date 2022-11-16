@@ -22,3 +22,17 @@ Cathy Da - 301177731
 
     window.addEventListener('load', Start);
 })();
+
+    //HIDE OR SHOW ARCHIVED INCIDENT LIST
+    document.getElementById("ArchiveBox").style.display = 'none';
+    ArchiveBtn.addEventListener('click', function handleClick() {
+        if (ArchiveBox.style.display === 'none') {
+            ArchiveBox.style.display = 'block';
+      
+            ArchiveBtn.textContent = 'Hide Archived Incidents';
+        } else {
+            ArchiveBox.style.display = 'none';
+      
+            ArchiveBtn.textContent = 'View Archived Incidents';
+        }
+      });

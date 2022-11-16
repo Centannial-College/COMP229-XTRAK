@@ -54,7 +54,7 @@ Cathy Da - 301177731
                          </td>
                          <% } %> 
                      </tr>
-                 <% } %>
+                 <% } %> 
              </tbody>
         </table>
         <% if(displayName) { %>
@@ -65,9 +65,12 @@ Cathy Da - 301177731
     
 </div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
+<center><button class = "archiveBtn btn-outline-primary" id="ArchiveBtn">View Archived Incidents</button></center>
+<br><br><br><br><br><br>
 
-<div class="top-50 start-50 translate-middle p-5 w-75 min-width2 archived">
+<!--ARCHIVED LIST -->
+<div class="top-50 start-50 translate-middle p-5 w-75 min-width2 archived" id="ArchiveBox">
 
     <h3 class="text-center">Archived Incident List</h3>
     <hr>
@@ -80,26 +83,22 @@ Cathy Da - 301177731
                 <th scope="col" class="text-center">Title</th>
                 <th scope="col" class="text-center">Priority</th>
                 <th scope="col" class="text-center">Status</th>
-                <% if(displayName) { %>
-                    <th></th>
-                    <th></th>
-                <% } %> 
+           
             </tr>
         </thead>
+       
         <tbody id="contactList">
-             
              <% for(let count = 0; count < incident.length; count++) { %>
                  <tr>
-                    <% if(incident.Status == "Archived") { %>
-                    <th scope="row" class="text-center"><%= count + 1 %></th>
+                        <th scope="row" class="text-center"><%= count + 1 %></th>
                         <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber + (count+1) %></td></a></td>
                         <td class="text-center"><%= incident[count].title %></td>
                         <td class="text-center"><%= incident[count].priority %></td>
-                        <td class="text-center">Archived</td>
-                        <% } %> 
+                        <td class="text-center"><%= incident[count].incidentStatus %></td>
+                      
                  </tr>
              <% } %>
          </tbody>
     </table>
 </div>
-
+ <!-- <% if (incident.incidentStatus == "Archived") { %>    --> <!-- <% } %> -->

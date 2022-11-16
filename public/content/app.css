@@ -128,3 +128,21 @@ min-width: 100px;
     position: relative;
     min-height:200px;
 }
+.archiveBtn{
+  background-color: #c09deb;
+    border-color: #532B88;
+    border-style: solid;
+    border-width:3px;
+    border-radius: 10px;;
+    color:white;
+    height: 45px;
+}
+.archiveBtn:hover{
+  background-color: #C8B1E4;
+    border-color: #532B88;
+    border-style: solid;
+    border-width:3px;
+    border-radius: 10px;;
+    color:white;
+    height: 45px;
+}

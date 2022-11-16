@@ -111,6 +111,21 @@ export function ProcessIncidentEditPage(req, res, next){
     } )
 }
 
+
+//edit current item in database with the id 
+export function DisplayIncidentViewPage(req, res, next){
+    let id = req.params.id;
+
+    incidentModel.findById(id, (err, incident) => {
+        if(err){
+            console.error(err);
+            res.end(err);
+        }
+
+        res.render('index', { title: 'View Incident', page: 'incident/view', incident: incident, userID: UserID(req), displayName: UserDisplayName(req) });
+    });    
+}
+
 //processes deletion of item in database
 export function ProcessIncidentDelete(req, res, next){
     let id = req.params.id;
