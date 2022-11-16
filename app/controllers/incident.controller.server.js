@@ -18,6 +18,8 @@ import incidentModel from '../models/incident.js';
 
 import { UserDisplayName } from '../utils/index.js';
 
+import { UserID } from '../utils/index.js';
+
 //gets all incidents in database
 export function DisplayIncidentList(req, res, next){
     incidentModel.find(function(err, incidentCollection) {
@@ -26,13 +28,13 @@ export function DisplayIncidentList(req, res, next){
             res.end(err);
         }
 
-        res.render('index', {title: 'Incident List', page: 'incident/list', incident: incidentCollection, displayName: UserDisplayName(req)});
+        res.render('index', {title: 'Incident List', page: 'incident/list', incident: incidentCollection, userID: UserID(req), displayName: UserDisplayName(req)});
     })
 }
 
 //displays page to add new item to database
 export function DisplayIncidentAddPage(req, res, next){
-    res.render('index', { title: 'Add Incident', page: 'incident/edit', incident: {}, displayName: UserDisplayName(req) });
+    res.render('index', { title: 'Add Incident', page: 'incident/edit', incident: {}, userID: UserID(req), displayName: UserDisplayName(req) });
 }
 
     let currentDate = new Date();
@@ -74,7 +76,7 @@ export function DisplayIncidentEditPage(req, res, next){
             res.end(err);
         }
 
-        res.render('index', { title: 'Edit Incident', page: 'incident/edit', incident: incident, displayName: UserDisplayName(req) });
+        res.render('index', { title: 'Edit Incident', page: 'incident/edit', incident: incident, userID: UserID(req), displayName: UserDisplayName(req) });
     });    
 }
 

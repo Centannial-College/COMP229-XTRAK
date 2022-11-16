@@ -24,6 +24,7 @@ import User from '../models/user.js';
 
 // import DisplayName Utility method
 import { UserDisplayName } from '../utils/index.js';
+import { UserID } from '../utils/index.js';
 
 // Display Functions
 export function DisplayLoginPage(req, res, next){
@@ -73,7 +74,9 @@ export function ProcessRegisterPage(req, res, next){
         username: req.body.username,
         emailAddress: req.body.emailAddress,
         displayName: req.body.firstName + " " + req.body.lastName,
-        userType: req.body.userType
+        userType: req.body.userType,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
     });
 
     User.register(newUser, req.body.password, function(err){
@@ -110,5 +113,5 @@ export function ProcessLogoutPage(req, res, next){
 }
 
 export function displayProfilePage(req, res, next){
-    res.render('index', { title: 'Profile', page: 'profile', displayName: UserDisplayName(req)} );
+    res.render('index', { title: 'Profile', page: 'profile', user: req.user, userID: UserID(req), displayName: UserDisplayName(req)} );
 };

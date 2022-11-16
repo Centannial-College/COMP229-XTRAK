@@ -37,6 +37,6 @@ router.post('/register', ProcessRegisterPage);
 // Process Logout Page
 router.get('/logout', ProcessLogoutPage);
 
-router.get('/profile', displayProfilePage);
+router.get('/profile/:id', displayProfilePage);
 
 export default router;
