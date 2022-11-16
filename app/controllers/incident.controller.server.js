@@ -47,6 +47,9 @@ export function DisplayIncidentAddPage(req, res, next){
 export function ProcessIncidentAddPage(req, res, next){
     
     let newIncident = incidentModel({
+        incidentTitle: req.body.incidentTitle,
+        incidentStatus: req.body.incidentStatus,
+        incidentNarrative: req.body.incidentNarrative,
         recordNumber: newTicketNumber,
         description: req.body.description,
         priority: req.body.priority,
@@ -87,6 +90,9 @@ export function ProcessIncidentEditPage(req, res, next){
     
     let newIncident = incidentModel({
         _id: req.body.id,
+        incidentTitle: req.body.incidentTitle,
+        incidentStatus: req.body.incidentStatus,
+        incidentNarrative: req.body.incidentNarrative,
         description: req.body.description,
         priority: req.body.priority,
         firstName: req.body.firstName,

@@ -19,6 +19,9 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const incidentSchema = new Schema({
+    incidentTitle: String,
+    incidentStatus: String,
+    incidentNarrative: String,
     recordNumber: String,
     description: String,
     priority: String,
