@@ -92,10 +92,7 @@ min-width:750px;
     display: inline;
     margin-bottom: 30px;
 }
-.container-fluid{
-  text-align: center;
-  height:92%;
-}
+
 .min-width{
   min-width: 200px;
   margin-top: 20px;
@@ -106,9 +103,9 @@ min-width:750px;
 }
 .boxFormat{
   height: 100%;
-border-radius: 15px;
-background-color: #532B88;
-min-width: 100px;
+  border-radius: 15px;
+  background-color: #532B88;
+  min-width: 100px;
 }
 .footer{
   background-color: #C8B1E4;

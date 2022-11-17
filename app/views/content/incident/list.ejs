@@ -14,7 +14,7 @@ Danill Velykyi - 301183618
 Cathy Da - 301177731 
 -->
 
-<div class="container-fluid" style="background-color: #8938F7">  
+<div class="container-fluid" style="background-color: #8938F7; height: 100%">  
     <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-75 min-width2">
         <h3 class="text-center">Active Incident List</h3>
         <hr>
@@ -27,11 +27,7 @@ Cathy Da - 301177731
                     <th scope="col" class="text-center">Title</th>
                     <th scope="col" class="text-center">Priority</th>
                     <th scope="col" class="text-center">Status</th>
-                    <th scope="col" class="text-center">Edit</th>
-                    <% if(displayName) { %>
-                        <th></th>
-                        <th></th>
-                    <% } %> 
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody id="contactList">
@@ -40,86 +36,70 @@ Cathy Da - 301177731
                         <% if (incident[count].incidentStatus == "New" || incident[count].incidentStatus == "Active") { %>
                         <th scope="row" class="text-center"><%= count + 1 %></th>
                             <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber + (count+1) %></td></a></td>
-                            <td class="text-center"><%= incident[count].title %></td>
+                            <td class="text-center"><%= incident[count].incidentTitle %></td>
                             <td class="text-center"><%= incident[count].priority %></td>
                             <td class="text-center"><%= incident[count].incidentStatus %></td>        
                     
                          <% if(displayName) { %>
                          <td class="text-center col-1">
-                             <a href="/incident-edit/<%= incident[count]._id %>"
-                                 class="btn btn-outline-dark btn-sm">
-                                 <i class="fas fa-pencil-alt"></i> Edit</a>
+                             <a href="/incident-edit/<%= incident[count]._id %>" class="btn btn-outline-dark btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                             <a href="/incident-delete/<%= incident[count]._id %>" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                          </td>  
                          <% } %>                
-                         <td class="text-center col-1">
-                             <a href="/incident-delete/<%= incident[count]._id %>"
-                                 class="btn btn-outline-danger btn-sm">
-                                 <i class="fas fa-trash-alt"></i> Delete</a>
-                         </td>
                          <% } %>
                      </tr>
                  <% } %> 
              </tbody>
         </table>
         <% if(displayName) { %>
-            <a href="/incident-add" class="btn btn-outline-primary" role="button">
-                <i class="fas fa-plus-circle"></i> Add an incident</a>
-        <% } %>
-    </div>
-    
-</div>
-
-<br><br>
-<center><button class = "archiveBtn btn-outline-primary" id="ArchiveBtn">View Archived Incidents</button></center>
-<br><br><br><br><br><br>
-
-<!--ARCHIVED LIST -->
-<div class="top-50 start-50 translate-middle p-5 w-75 min-width2 archived" id="ArchiveBox">
-
-    <h3 class="text-center">Archived Incident List</h3>
-    <hr>
-    <!-- Table with values from database -->
-    <table class="table table-striped table-hover">
-        <thead class="table-striped">
-            <tr>
-                <th scope="col" class="text-center">ID</th>
-                <th scope="col" class="text-center">Record Number</th>
-                <th scope="col" class="text-center">Title</th>
-                <th scope="col" class="text-center">Priority</th>
-                <th scope="col" class="text-center">Status</th> 
-                <% if(displayName.userType == "Admin") { %> 
-                <th scope="col" class="text-center">Edit</th>
-                <% } %>  
+            <div class="col-md-12 text-center">
+                <a href="/incident-add" class="btn btn-outline-primary" role="button">
+                    <i class="fas fa-plus-circle"></i> Add an incident</a>
+                <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseArchived" role="button" aria-expanded="false" aria-controls="collapseArchived">
+                    <i class="fas fa-circle-chevron-down"></i> Archived List
+                </a>
+            </div>
+        <div class="collapse mt-4" id="collapseArchived">
+            <!--Archived List-->
+            <h3 class="text-center">Archived Incident List</h3>
+        <hr>
+        <table class="table table-striped table-hover">
+            <thead class="table-striped">
+                <tr>
+                    <th scope="col" class="text-center">ID</th>
+                    <th scope="col" class="text-center">Record Number</th>
+                    <th scope="col" class="text-center">Title</th>
+                    <th scope="col" class="text-center">Priority</th>
+                    <th scope="col" class="text-center">Status</th> 
+                    <% if(user.userType == "Admin") { %> 
+                    <th scope="col" class="text-center">Actions</th>
+                    <% } %>  
+               
+                </tr>
+            </thead>
            
-            </tr>
-        </thead>
-       
-        <tbody id="contactList">
-             <% for(let count = 0; count < incident.length; count++) { %>
-                 <tr>
-                    <% if (incident[count].incidentStatus == "Archived") { %>
-                        <th scope="row" class="text-center"><%= count + 1 %></th>
-                        <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber + (count+1) %></td></a></td>
-                        <td class="text-center"><%= incident[count].title %></td>
-                        <td class="text-center"><%= incident[count].priority %></td>
-                        <td class="text-center"><%= incident[count].incidentStatus %></td> 
-                        
-                        <% if(displayName.userType == "Admin") { %> 
-                            <td class="text-center col-1">
-                                <a href="/incident-edit/<%= incident[count]._id %>"
-                                    class="btn btn-outline-dark btn-sm">
-                                    <i class="fas fa-pencil-alt"></i> Edit</a>
-                            </td>                      
-                            <td class="text-center col-1">
-                                <a href="/incident-delete/<%= incident[count]._id %>"
-                                    class="btn btn-outline-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i> Delete</a>
-                            </td>
-                            <% } %>  
-                    <% } %>
-                 </tr>
-             <% } %>
-         </tbody>
-    </table>
+            <tbody id="contactList">
+                <% for(let count = 0; count < incident.length; count++) { %>
+                     <tr>
+                        <% if (incident[count].incidentStatus == "Archived") { %>
+                            <th scope="row" class="text-center"><%= count + 1 %></th>
+                            <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber + (count+1) %></td></a></td>
+                            <td class="text-center"><%= incident[count].incidentTitle %></td>
+                            <td class="text-center"><%= incident[count].priority %></td>
+                            <td class="text-center"><%= incident[count].incidentStatus %></td> 
+                            
+                            <% if(user.userType == "Admin") { %> 
+                                <td class="text-center col-1">
+                                    <a href="/incident-edit/<%= incident[count]._id %>" class="btn btn-outline-dark btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="/incident-delete/<%= incident[count]._id %>" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                </td> 
+                            <% } %>   
+                        <% } %>
+                     </tr>
+                <% } %>
+             </tbody>
+        </table>
+        </div>
+        <% } %>     
+    </div>
 </div>
- <!--  -->

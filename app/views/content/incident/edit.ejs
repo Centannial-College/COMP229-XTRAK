@@ -1,10 +1,8 @@
 <!--
 File: edit.ejs
 Date: 10.11.2022
-
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
-
 ---- DEVELOPERS ----
 Tim Upton – 301259058 
 Pedro Da Silva Dergado – 301239283 
@@ -13,9 +11,6 @@ Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
 Cathy Da - 301177731 
 -->
-
-  <!--ADD A NEW INCIDENT-->
-<% if (incident.incidentStatus == null) { %>
 <div class ="container-bottom"></div>
 <div class="container-fluid" style="background-color: #8938F7; height: 100%">  
     <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-25">
@@ -23,18 +18,10 @@ Cathy Da - 301177731
         <hr>
         <!-- Form -->
         <form class="form" method="POST">
+            <% if (incident.incidentStatus == "Archived") { %>
+                <fieldset disabled="disabled">
+            <% } %>  
             <input type="hidden" name="id" value="<%= incident._id %>" >
-            <input type="hidden" name="incidentStatus" value="New" >
-
-            <div class="form-group">
-                <label for="incidentTitle">Incident Title</label>
-                <input type="text" class="form-control"
-                id="incidentTitle"
-                placeholder="Enter a title"
-                name="incidentTitle" 
-                value="<%= incident.incidentTitle %>"
-                required>
-            </div>
             <div class="form-group">
                 <label for="incidentD">Incident Description</label>
                 <input type="text" class="form-control"
@@ -95,134 +82,24 @@ Cathy Da - 301177731
                 placeholder="Enter email address"
                 name="emailAddress"                     
                 value="<%= incident.emailAddress %>"
-                required
+                required 
                 >
                 </input>
             </div>
-
+           
             <div class="form-group">
                 <label for="phoneN">Phone Number</label>
                 <input type="text" class="form-control"
                 id="phoneN"
-                placeholder="Enter the phoneNumber"
+                placeholder="Enter phone number"
                 name="phoneNumber"                     
                 value="<%= incident.phoneNumber %>"
                 required
                 >
                 </input>
             </div>
-            
-            <div class="d-grid gap-2 mt-3">
-                <button class="btn btn-outline-primary" type="submit"><i class="fas fa-edit"></i> Submit</button>
-                <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
-            </div>
-        </form>
-    </div>
-</div>
-<% } %>
-
-
-  <!--EDIT AN INCIDENT-->
-<% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active") { %>
-    <div class ="container-bottom"></div>
-    <div class="container-fluid" style="background-color: #8938F7; height: 100%">  
-        <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-25">
-            <h3 class="text-center">Edit Incident</h3>
-            <hr>
-            <!-- Form -->
-            <form class="form" method="POST">
-                <input type="hidden" name="id" value="<%= incident._id %>" >
-    
-                <div class="form-group">
-                    <label for="incidentTitle">Incident Title</label>
-                    <input type="text" class="form-control"
-                    id="incidentTitle"
-                    placeholder="Enter a title"
-                    name="incidentTitle" 
-                    value="<%= incident.incidentTitle %>"
-                    required>
-                </div>
-                <div class="form-group">
-                    <label for="incidentD">Incident Description</label>
-                    <input type="text" class="form-control"
-                    id="incidentD"
-                    placeholder="Enter the description"
-                    name="description" 
-                    value="<%= incident.description %>"
-                    required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="priorityT">Priority type</label>
-                    <select class="form-select" aria-label="Priority type" name="priority">
-                        <% if (incident.priority == "Low") { %>
-                                <option value="Low" selected>Low</option>
-                            <% } else { %>
-                                <option value="Low">Low</option>
-                            <% } %>
-                            <% if (incident.priority == "Normal") { %>
-                                <option value="Normal" selected>Normal</option>
-                            <% } else { %>
-                                <option value="Normal">Normal</option>
-                            <% } %>
-                            <% if (incident.priority == "High") { %>
-                                <option value="High" selected>High</option>
-                            <% } else { %>
-                                <option value="High">High</option>
-                            <% } %>
-                    </select>
-                </div>
-    
-                <div class="form-group">
-                    <label for="firstN">First Name</label>
-                    <input type="text" class="form-control"
-                    id="firstN"
-                    placeholder="Enter first name"
-                    name="firstName" 
-                    value="<%= incident.firstName %>"
-                    required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="lastN">Last Name</label>
-                    <input type="text" class="form-control"
-                    id="lastN"
-                    placeholder="Enter last name"
-                    name="lastName"                     
-                    value="<%= incident.lastName %>"
-                    required
-                    >
-                    </input>
-                </div>
-    
-                <div class="form-group">
-                    <label for="emailA">Email Address</label>
-                    <input type="text" class="form-control"
-                    id="emailA"
-                    placeholder="Enter email address"
-                    name="emailAddress"                     
-                    value="<%= incident.emailAddress %>"
-                    required
-                    >
-                    </input>
-                </div>
-    
-                <div class="form-group">
-                    <label for="phoneN">Phone Number</label>
-                    <input type="text" class="form-control"
-                    id="phoneN"
-                    placeholder="Enter the phoneNumber"
-                    name="phoneNumber"                     
-                    value="<%= incident.phoneNumber %>"
-                    required>
-                    </input>
-                </div>
-                
-                <div class="d-grid gap-2 mt-3">
-                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-edit"></i> Submit</button>
-                    <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
-                </div>
-
+              
+            <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
                 <div class="form-group">
                     <label for="priorityT">Status</label>
                     <select class="form-select" aria-label="Status" name="incidentStatus">
@@ -243,101 +120,16 @@ Cathy Da - 301177731
                             <% } %>
                     </select>
                 </div>
-
-            </form>
-        </div>
+            <% } %>    
+            <% if (incident.incidentStatus == "Archived") { %>
+                </fieldset>
+            <% } %>
+        
+            <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-outline-primary" type="submit"><i class="fas fa-edit"></i> Submit</button>
+                <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
+            </div>
+        
+        </form>
     </div>
-    <% } %>
-    
-
-    <!--ARCHIVED INCIDENT-->
- <% if (incident.incidentStatus == "Archived") { %>
-    <div class ="container-bottom"></div>
-    <div class="container-fluid" style="background-color: #8938F7; height: 100%">  
-        <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-25">
-            <h3 class="text-center">Archived Incident</h3>
-            <hr>
-            <!-- Form -->
-            <form class="form" method="POST">
-                <input type="hidden" name="id" value="<%= incident._id %>" >
-    
-                <div class="form-group">
-                    <label for="incidentTitle">Incident Title</label>
-                    <input type="text" class="form-control"
-                    id="incidentTitle"
-                    placeholder="Enter a title"
-                    name="incidentTitle" 
-                    value="<%= incident.incidentTitle %> " disabled
-                    required>
-                </div>
-                <div class="form-group">
-                    <label for="incidentD">Incident Description</label>
-                    <input type="text" class="form-control"
-                    id="incidentD"
-                    placeholder="Enter the description"
-                    name="description" 
-                    value="<%= incident.description %> " disabled>
-                </div>
-    
-                <div class="form-group">
-                    <label for="priorityT">Priority type</label>
-                    <input type="text" class="form-control"
-                    value = "<% incident.priority %>" disabled>
-                </div>
-    
-                <div class="form-group">
-                    <label for="firstN">First Name</label>
-                    <input type="text" class="form-control"
-                    id="firstN"
-                    placeholder="Enter first name"
-                    name="firstName" 
-                    value="<%= incident.firstName %>"
-                    disabled>
-                </div>
-    
-                <div class="form-group">
-                    <label for="lastN">Last Name</label>
-                    <input type="text" class="form-control"
-                    id="lastN"
-                    placeholder="Enter last name"
-                    name="lastName"                     
-                    value="<%= incident.lastName %>"
-                    disabled>
-                    </input>
-                </div>
-    
-                <div class="form-group">
-                    <label for="emailA">Email Address</label>
-                    <input type="text" class="form-control"
-                    id="emailA"
-                    placeholder="Enter email address"
-                    name="emailAddress"                     
-                    value="<%= incident.emailAddress %>"
-                    disabled>
-                    </input>
-                </div>
-    
-                <div class="form-group">
-                    <label for="phoneN">Phone Number</label>
-                    <input type="text" class="form-control"
-                    id="phoneN"
-                    placeholder="Enter the phoneNumber"
-                    name="phoneNumber"                     
-                    value="<%= incident.phoneNumber %>"
-                    disabled>
-                    </input>
-                </div>
-
-                <div class="form-group">
-                    <label for="priorityT">Status</label>
-                        <input type="text" value="Archived" class="form-control" disabled>  
-                    </select>
-                </div>
-                
-                <div class="d-grid gap-2 mt-3">
-                    <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Close</a>
-                </div>
-            </form>
-        </div>
-    </div>
-        <% } %>
+</div>

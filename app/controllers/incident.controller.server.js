@@ -28,7 +28,7 @@ export function DisplayIncidentList(req, res, next){
             res.end(err);
         }
 
-        res.render('index', {title: 'Incident List', page: 'incident/list', incident: incidentCollection, userID: UserID(req), displayName: UserDisplayName(req)});
+        res.render('index', {title: 'Incident List', page: 'incident/list', incident: incidentCollection, userID: UserID(req), user: req.user, displayName: UserDisplayName(req)});
     })
 }
 
@@ -48,7 +48,7 @@ export function ProcessIncidentAddPage(req, res, next){
     
     let newIncident = incidentModel({
         incidentTitle: req.body.incidentTitle,
-        incidentStatus: req.body.incidentStatus,
+        incidentStatus: "New",
         incidentNarrative: req.body.incidentNarrative,
         recordNumber: newTicketNumber,
         description: req.body.description,
