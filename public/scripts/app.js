@@ -37,3 +37,39 @@ Cathy Da - 301177731
             ArchiveBtn.textContent = 'View Archived Incidents';
         }
       });
+
+      //RESIZE NARRATIVE SCROLL BAR 
+    //   const textarea = document.getElementById("incidentNarrative");
+
+    //   textarea.addEventListener("input", function (e) {
+    //     this.style.height = "auto";
+    //     this.style.height = this.scrollHeight + "px";
+    //   });
+
+    // document.getElementById("saveNarrative").onclick = function(){
+    //     prompt("TEST");
+    //     alert("OK");
+    // }
+
+    //   function saveNarrative(){
+    //     alert("OK");
+    //     console.log("OK");
+    // }
+
+    function populateNarrative(){
+
+        var date = new Date();
+        var day = String(date.getDate()).padStart(2, '0');
+        var mon = String(date.getMonth() + 1).padStart(2, '0'); 
+        var year = date.getFullYear();
+        date = mon + '/' + day + '/' + year;
+
+    var comment = document.getElementById("commentBox").value;
+    var narrative = document.getElementById("narrativeBox").value;
+    var output = narrative + "\n" + date + ": " + comment;
+    document.getElementById("narrativeBox").value = output;
+    document.getElementById("narrativeSave").value = output;
+    document.getElementById("commentBox").value = "";
+
+    }
+    
