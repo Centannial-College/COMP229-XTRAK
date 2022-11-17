@@ -50,7 +50,6 @@ export function ProcessIncidentAddPage(req, res, next){
         incidentTitle: req.body.incidentTitle,
         incidentStatus: req.body.incidentStatus,
         incidentNarrative: req.body.incidentNarrative,
-        comment: req.body.comment,
         recordNumber: newTicketNumber,
         description: req.body.description,
         priority: req.body.priority,

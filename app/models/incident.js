@@ -22,7 +22,6 @@ const incidentSchema = new Schema({
     incidentTitle: String,
     incidentStatus: String,
     incidentNarrative: String,
-    comment: String,
     recordNumber: String,
     description: String,
     priority: String,

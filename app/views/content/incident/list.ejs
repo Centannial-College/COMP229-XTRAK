@@ -40,7 +40,7 @@ Cathy Da - 301177731
                         <% if (incident[count].incidentStatus == "New" || incident[count].incidentStatus == "Active") { %>
                         <th scope="row" class="text-center"><%= count + 1 %></th>
                             <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber + (count+1) %></td></a></td>
-                            <td class="text-center"><%= incident[count].incidentTitle %></td>
+                            <td class="text-center"><%= incident[count].title %></td>
                             <td class="text-center"><%= incident[count].priority %></td>
                             <td class="text-center"><%= incident[count].incidentStatus %></td>        
                     
@@ -100,7 +100,7 @@ Cathy Da - 301177731
                     <% if (incident[count].incidentStatus == "Archived") { %>
                         <th scope="row" class="text-center"><%= count + 1 %></th>
                         <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber + (count+1) %></td></a></td>
-                        <td class="text-center"><%= incident[count].incidentTitle %></td>
+                        <td class="text-center"><%= incident[count].title %></td>
                         <td class="text-center"><%= incident[count].priority %></td>
                         <td class="text-center"><%= incident[count].incidentStatus %></td> 
                         

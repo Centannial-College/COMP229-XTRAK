@@ -13,6 +13,7 @@ Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
 Cathy Da - 301177731 
 -->
+
   <!--ADD A NEW INCIDENT-->
 <% if (incident.incidentStatus == null) { %>
 <div class ="container-bottom"></div>
@@ -121,23 +122,21 @@ Cathy Da - 301177731
 <% } %>
 
 
-
-
   <!--EDIT AN INCIDENT-->
 <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active") { %>
     <div class ="container-bottom"></div>
     <div class="container-fluid" style="background-color: #8938F7; height: 100%">  
-        <div class="editBox">
+        <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-25">
             <h3 class="text-center">Edit Incident</h3>
             <hr>
             <!-- Form -->
             <form class="form" method="POST">
                 <input type="hidden" name="id" value="<%= incident._id %>" >
-
+    
                 <div class="form-group">
                     <label for="incidentTitle">Incident Title</label>
                     <input type="text" class="form-control"
-                    id="incidentT"
+                    id="incidentTitle"
                     placeholder="Enter a title"
                     name="incidentTitle" 
                     value="<%= incident.incidentTitle %>"
@@ -220,65 +219,34 @@ Cathy Da - 301177731
                 </div>
                 
                 <div class="d-grid gap-2 mt-3">
-                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-edit"></i> Save</button>
-                    <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel </a>
-                </div>     
-            
-        </div>
-        <!--SECOND EDIT BOX INFO -->
-        <div class="editBox"><h3>Incident Details</h3>
-            <hr>
-            <div class="form-group">
-                <label for="priorityT">Status</label>
-                <select class="form-select" aria-label="Status" name="incidentStatus">
-                    <% if (incident.incidentStatus == "New") { %>
-                            <option value="New" selected>New</option>
-                        <% } else { %>
-                            <option value="New">New</option>
-                        <% } %>
-                        <% if (incident.incidentStatus == "Active") { %>
-                            <option value="Active" selected>Active</option>
-                        <% } else { %>
-                            <option value="Active">Active</option>
-                        <% } %>
-                        <% if (incident.incidentStatus == "Archived") { %>
-                            <option value="Archived" selected>Archive</option>
-                        <% } else { %>
-                            <option value="Archived">Archive</option>
-                        <% } %>
-                </select>
-            </div>
-            <div class ="" height="500px">
-            <div class="form-group">
-                <label for="phoneN">Date Opened (DD-MM-YYYY)</label>
-                <input type="text" class="form-control"
-                id="incidentDate"
-                name="incidentDate"                     
-                value="<%=incident.recordNumber.substring(0,2)%>-<%=incident.recordNumber.substring(2,4)%>-<%=incident.recordNumber.substring(4,8)%>"
-                disabled>
-                </input>
-            </div>
-            <br>
-            <div class="form-floating">Narrative
-                <label for="floatingTextarea"></label>
-                <textarea class="form-control resize" id="narrativeBox" style="height: 230px" disabled>
-                    <%=incident.incidentNarrative%>
-            </textarea>
-            <br>
-   
-            <div class="form-floating">Add Comments to Narrative
-                <label for="floatingTextarea"></label>
-                <input type="text" id="commentBox" class="form-control" style="height: 30px"
-                >
-                <input type="hidden" id="narrativeSave" name="incidentNarrative" value="<%=incident.incidentNarrative%>">
+                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-edit"></i> Submit</button>
+                    <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
+                </div>
+
+                <div class="form-group">
+                    <label for="priorityT">Status</label>
+                    <select class="form-select" aria-label="Status" name="incidentStatus">
+                        <% if (incident.incidentStatus == "New") { %>
+                                <option value="New" selected>New</option>
+                            <% } else { %>
+                                <option value="New">New</option>
+                            <% } %>
+                            <% if (incident.incidentStatus == "Active") { %>
+                                <option value="Active" selected>Active</option>
+                            <% } else { %>
+                                <option value="Active">Active</option>
+                            <% } %>
+                            <% if (incident.incidentStatus == "Archived") { %>
+                                <option value="Archived" selected>Archive</option>
+                            <% } else { %>
+                                <option value="Archived">Archive</option>
+                            <% } %>
+                    </select>
+                </div>
+
             </form>
-            <br>
-            <button class="btn btn-outline-primary" onclick="populateNarrative()">Save Comment</button>
-        </div>
         </div>
     </div>
-
-
     <% } %>
     
 
