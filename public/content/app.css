@@ -94,7 +94,13 @@ min-width:750px;
 }
 .container-fluid{
   text-align: center;
-  height:92%;
+  min-height: 110%;
+  height:auto;
+  padding-top:50px;
+  padding-left:30px;
+  padding-right:30px;
+  padding-bottom:30px;
+
 }
 .min-width{
   min-width: 200px;
@@ -145,4 +151,20 @@ min-width: 100px;
     border-radius: 10px;;
     color:white;
     height: 45px;
+}
+.editBox{
+background-color:whitesmoke;
+margin-top:50px;
+margin-left: 20px;
+width: 45%;
+min-width:400px;
+border: solid 3px purple;
+border-radius: 15px;
+padding: 15px;
+display: inline-block;
+float:left;
+}
+
+.resize {
+  resize: none;
 }
