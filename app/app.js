@@ -52,6 +52,7 @@ import { MongoURI, Secret } from '../config/config.js';
 import indexRouter from './routes/index.route.server.js'
 import incidentRouter from './routes/incident.route.server.js';
 import authRouter from './routes/auth.route.server.js';
+import logsRouter from './routes/logs.route.server.js';
 
 
 // Import API Routes
@@ -130,6 +131,7 @@ passport.use(strategy);
 app.use('/', indexRouter);
 app.use('/', incidentRouter);
 app.use('/', authRouter);
+app.use('/', logsRouter);
 app.use('/api/auth', authApiRouter);
 app.use('/api/incidents', passport.authenticate('jwt', {session: false}), incidentsApiRouter);
 

@@ -23,8 +23,7 @@ import passport from 'passport';
 import User from '../models/user.js';
 
 // import DisplayName Utility method
-import { UserDisplayName } from '../utils/index.js';
-import { UserID } from '../utils/index.js';
+import { UserDisplayName, UserID } from '../utils/index.js';
 
 // Display Functions
 export function DisplayLoginPage(req, res, next){

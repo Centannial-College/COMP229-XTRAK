@@ -1,5 +1,5 @@
 /*
-File: incident.js
+File: logs.js
 Date: 10.11.2022
 
 NAME: xTrak - Incident Reporting
@@ -18,20 +18,14 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const incidentSchema = new Schema({
-    incidentTitle: String,
-    incidentStatus: String,
-    incidentNarrative: String,
-    recordNumber: String,
-    description: String,
-    priority: String,
-    firstName: String,
-    lastName: String,
-    emailAddress: String,
-    phoneNumber: String
+const logsSchema = new Schema({
+    date: String,
+    username: String,
+    userType: String,
+    action: String
 }, {
     timestamps: true,
-    collection: 'incident'
+    collection: 'logs'
 });
 
-export default mongoose.model('Incidents', incidentSchema);
+export default mongoose.model('Logs', logsSchema);

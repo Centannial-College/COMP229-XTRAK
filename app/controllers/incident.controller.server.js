@@ -6,19 +6,25 @@ NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
 
 ---- DEVELOPERS ----
-Tim Upton – 301259058 
-Pedro Da Silva Dergado – 301239283 
-Alex Damovski – 301192233 
-Tyler Mercier – STUDENT NUM 
+Tim Upton – 301259058
+Pedro Da Silva Dergado – 301239283
+Alex Damovski – 301192233
+Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
-Cathy Da - 301177731 
+Cathy Da - 301177731
 */
 
 import incidentModel from '../models/incident.js';
 
-import { UserDisplayName } from '../utils/index.js';
+import { UserDisplayName, UserID } from '../utils/index.js';
+import logsModel from '../models/logs.js';
 
-import { UserID } from '../utils/index.js';
+    let currentDate = new Date();
+    let day = currentDate.getDate().toString();
+    let month = (currentDate.getMonth() + 1).toString();
+    let year = currentDate.getFullYear().toString();
+    let time = currentDate.toTimeString().split(' ')[0];
+    let newTicketNumber = day + month + year + "-00000";
 
 //gets all incidents in database
 export function DisplayIncidentList(req, res, next){
@@ -37,15 +43,9 @@ export function DisplayIncidentAddPage(req, res, next){
     res.render('index', { title: 'Add Incident', page: 'incident/edit', incident: {}, userID: UserID(req), displayName: UserDisplayName(req) });
 }
 
-    let currentDate = new Date();
-    let day = currentDate.getDate().toString();
-    let month = (currentDate.getMonth() + 1).toString();
-    let year = currentDate.getFullYear().toString();
-    let newTicketNumber = day + month + year + "-00000";
 
 //process information to the database
 export function ProcessIncidentAddPage(req, res, next){
-    
     let newIncident = incidentModel({
         incidentTitle: req.body.incidentTitle,
         incidentStatus: "New",
@@ -59,6 +59,19 @@ export function ProcessIncidentAddPage(req, res, next){
         phoneNumber: req.body.phoneNumber
     });
 
+    let newLog = logsModel({
+        date: day + "-" + month + "-" + year + " " + time,
+        username: req.user.username,
+        userType: req.user.userType,
+        action: "Create a new incident #" + newTicketNumber
+    })
+    //adding to logs this action
+    logsModel.create(newLog, (err, Incident) => {
+        if(err){
+            console.error(err);
+            res.end(err);
+        };
+    } )
     incidentModel.create(newIncident, (err, Incident) => {
         if(err){
             console.error(err);
@@ -80,7 +93,7 @@ export function DisplayIncidentEditPage(req, res, next){
         }
 
         res.render('index', { title: 'Edit Incident', page: 'incident/edit', incident: incident, userID: UserID(req), displayName: UserDisplayName(req) });
-    });    
+    });
 }
 
 //processes the information from the edit page
@@ -129,6 +142,20 @@ export function DisplayIncidentViewPage(req, res, next){
 //processes deletion of item in database
 export function ProcessIncidentDelete(req, res, next){
     let id = req.params.id;
+
+    let newLog = logsModel({
+        date: day + "-" + month + "-" + year + " " + time,
+        username: req.user.username,
+        userType: req.user.userType,
+        action: "Delete incident #" + newTicketNumber
+    })
+
+    logsModel.create(newLog, (err, Incident) => {
+        if(err){
+            console.error(err);
+            res.end(err);
+        };
+    } )
 
     incidentModel.remove({_id: id}, (err) => {
         if (err){

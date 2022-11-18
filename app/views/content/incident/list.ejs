@@ -6,15 +6,15 @@ NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
 
 ---- DEVELOPERS ----
-Tim Upton – 301259058 
-Pedro Da Silva Dergado – 301239283 
-Alex Damovski – 301192233 
-Tyler Mercier – STUDENT NUM 
+Tim Upton – 301259058
+Pedro Da Silva Dergado – 301239283
+Alex Damovski – 301192233
+Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
-Cathy Da - 301177731 
+Cathy Da - 301177731
 -->
 
-<div class="container-fluid" style="background-color: #8938F7; height: 100%">  
+<div class="container-fluid" style="background-color: #8938F7; height: 100%">
     <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-75 min-width2">
         <h3 class="text-center">Active Incident List</h3>
         <hr>
@@ -35,20 +35,21 @@ Cathy Da - 301177731
                      <tr>
                         <% if (incident[count].incidentStatus == "New" || incident[count].incidentStatus == "Active") { %>
                         <th scope="row" class="text-center"><%= count + 1 %></th>
-                            <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber + (count+1) %></td></a></td>
+                            <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber %></td></a></td>
                             <td class="text-center"><%= incident[count].incidentTitle %></td>
                             <td class="text-center"><%= incident[count].priority %></td>
-                            <td class="text-center"><%= incident[count].incidentStatus %></td>        
-                    
+                            <td class="text-center"><%= incident[count].incidentStatus %></td>
                          <% if(displayName) { %>
                          <td class="text-center col-1">
                              <a href="/incident-edit/<%= incident[count]._id %>" class="btn btn-outline-dark btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                             <a href="/incident-delete/<%= incident[count]._id %>" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                         </td>  
-                         <% } %>                
+                             <% if(user.userType == "Admin") { %>
+                                <a href="/incident-delete/<%= incident[count]._id %>" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                             <% } %>
+                         </td>
+                         <% } %>
                          <% } %>
                      </tr>
-                 <% } %> 
+                 <% } %>
              </tbody>
         </table>
         <% if(displayName) { %>
@@ -70,36 +71,33 @@ Cathy Da - 301177731
                     <th scope="col" class="text-center">Record Number</th>
                     <th scope="col" class="text-center">Title</th>
                     <th scope="col" class="text-center">Priority</th>
-                    <th scope="col" class="text-center">Status</th> 
-                    <% if(user.userType == "Admin") { %> 
+                    <th scope="col" class="text-center">Status</th>
+                    <% if(user.userType == "Admin") { %>
                     <th scope="col" class="text-center">Actions</th>
-                    <% } %>  
-               
+                    <% } %>
                 </tr>
             </thead>
-           
             <tbody id="contactList">
                 <% for(let count = 0; count < incident.length; count++) { %>
                      <tr>
                         <% if (incident[count].incidentStatus == "Archived") { %>
                             <th scope="row" class="text-center"><%= count + 1 %></th>
-                            <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber + (count+1) %></td></a></td>
+                            <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber %></td></a></td>
                             <td class="text-center"><%= incident[count].incidentTitle %></td>
                             <td class="text-center"><%= incident[count].priority %></td>
-                            <td class="text-center"><%= incident[count].incidentStatus %></td> 
-                            
-                            <% if(user.userType == "Admin") { %> 
+                            <td class="text-center"><%= incident[count].incidentStatus %></td>
+                            <% if(user.userType == "Admin") { %>
                                 <td class="text-center col-1">
                                     <a href="/incident-edit/<%= incident[count]._id %>" class="btn btn-outline-dark btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                     <a href="/incident-delete/<%= incident[count]._id %>" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                </td> 
-                            <% } %>   
+                                </td>
+                            <% } %>
                         <% } %>
                      </tr>
                 <% } %>
              </tbody>
         </table>
         </div>
-        <% } %>     
+        <% } %>
     </div>
 </div>
