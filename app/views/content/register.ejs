@@ -1,10 +1,8 @@
 <!--
-File: register.ejs
+File: edit.ejs
 Date: 10.11.2022
-
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
-
 ---- DEVELOPERS ----
 Tim Upton – 301259058 
 Pedro Da Silva Dergado – 301239283 
@@ -13,14 +11,23 @@ Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
 Cathy Da - 301177731 
 -->
-<div class ="container-bottom"></div>
-<div class="container-fluid" style="background-color: #8938F7; height: 100%">
+
+<div class="container-fluid" style="background-color: #8938F7;">  
   <br>
-  <div class="infoStatement">
-    <h1 class="display-6">xTrak is the latest tool for <u>incident reports</u> that allows your company to function at full speed!</h1>
-  </div>
-  <div class="position-absolute top-50 start-50 translate-middle bg-light p-5">
-    <h1 class="display-4">Sign Up</h1>
+  <div class="row row-cols-1 row-cols-md-2 g-4 text-center mt-5">
+      <div class="col">
+        <div class="card" style="background: none;height:630px;border: none;">
+          <div class="position-absolute top-50 start-50 translate-middle" style="background: none;">
+            <h1 class="display-6 text-white">xTrak is the latest tool for <u>incident reports</u> that allows your company to function at full speed!</h1>
+          </div>
+        </div>
+      </div>
+  
+      <!--SECOND DIV BOX -->
+      <div class="col">
+        <div class="card text-center">
+          <div class="card-body">
+            <h1 class="display-4">Sign Up</h1>
     <!-- Message Area -->
     <% if(messages.length > 0) { %>
       <div id="messageArea" class="alert alert-danger">
@@ -104,9 +111,15 @@ Cathy Da - 301177731
               Already have an account? 
               <a class="link" href="/login">Sign in</a>
             </p>
-          </div>
-          <div class ="container-bottom"></div>
-</div>
-</div>
-<br><br>
+          </div>  
 
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+    </div>
+   
+  </div>
+  
