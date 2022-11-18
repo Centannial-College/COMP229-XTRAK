@@ -53,6 +53,7 @@ import indexRouter from './routes/index.route.server.js'
 import incidentRouter from './routes/incident.route.server.js';
 import authRouter from './routes/auth.route.server.js';
 import logsRouter from './routes/logs.route.server.js';
+import profileRouter from './routes/profile.route.server.js';
 
 
 // Import API Routes
@@ -132,6 +133,7 @@ app.use('/', indexRouter);
 app.use('/', incidentRouter);
 app.use('/', authRouter);
 app.use('/', logsRouter);
+app.use('/', profileRouter);
 app.use('/api/auth', authApiRouter);
 app.use('/api/incidents', passport.authenticate('jwt', {session: false}), incidentsApiRouter);
 

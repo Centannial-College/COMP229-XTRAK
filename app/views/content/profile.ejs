@@ -18,7 +18,7 @@ Cathy Da - 301177731
 <div class="container-fluid" style="background-color: #8938F7; height: 100%">
   <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 rounded-4">
     <% if(messages.length > 0) { %>
-        <div id="messageArea" class="alert alert-success">
+        <div id="messageArea" class="alert alert-success ">
           <%= messages %>
         </div>
       <% } %> 
@@ -57,16 +57,14 @@ Cathy Da - 301177731
             </div>
         </div>
 
-        <div class="d-grid gap-2 mt-4 btn-group">
-            <div class="btn-group" role="group" aria-label="Buttons">
-                <button id="submitButton" type="submit" class="btn btn-outline-primary btn-lg">
-                    <i class="fas fa-edit"></i> Save</button>
-                <a href='/' class="btn btn-outline-warning btn-lg">
-                    <i class="fas fa-undo"></i> Cancel</a>
+        <div class="gap-2 p-2 mt-4 btn-group position-absolute bottom-0 end-0">
+            <div role="group" aria-label="Buttons">
+                <button id="submitButton" type="submit" class="btn btn-outline-primary"> Save</button>
+                <a href="/profile-delete/<%= userID %>" class="btn btn-outline-danger">Delete</a>
+                <a href='/' class="btn btn-outline-secondary"> Cancel</a>
             </div>
         </div>             
     </form>             
     </div>
 </div>
 <br><br>
-

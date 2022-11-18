@@ -15,11 +15,9 @@ Cathy Da - 301177731
 */
 import {Router} from 'express';
 import { DisplayLoginPage, 
-    displayProfilePage, 
     DisplayRegisterPage, 
     ProcessLoginPage,
     ProcessLogoutPage,
-    processProfilePage,
     ProcessRegisterPage} from '../controllers/auth.controller.server.js';
 
 const router = Router();
@@ -37,8 +35,5 @@ router.post('/register', ProcessRegisterPage);
 
 // Process Logout Page
 router.get('/logout', ProcessLogoutPage);
-
-router.get('/profile/:id', displayProfilePage);
-router.post('/profile/:id', processProfilePage)
 
 export default router;
