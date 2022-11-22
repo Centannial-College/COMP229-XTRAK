@@ -60,6 +60,7 @@ export function ProcessIncidentAddPage(req, res, next){
     });
 
     let newLog = logsModel({
+        log_id: req.body.id,
         date: day + "-" + month + "-" + year + " " + time,
         username: req.user.username,
         userType: req.user.userType,
@@ -167,3 +168,16 @@ export function ProcessIncidentDelete(req, res, next){
     })
 }
 
+//edit current item in database with the id 
+export function DisplayLogPage(req, res, next){
+    let id = req.params.id;
+
+    logsModel.findById(id, (err, incident) => {
+        if(err){
+            console.error(err);
+            res.end(err);
+        }
+
+        res.render('index', { title: 'View Log', page: 'incident/view', log: log, userID: UserID(req), displayName: UserDisplayName(req) });
+    });
+}

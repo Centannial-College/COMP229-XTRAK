@@ -31,3 +31,4 @@ export function LogsIncidentList(req, res, next){
         res.render('index', {title: 'Logs List', page: 'logs', logs: logsCollection, userID: UserID(req), user: req.user, displayName: UserDisplayName(req)});
     })
 }
+

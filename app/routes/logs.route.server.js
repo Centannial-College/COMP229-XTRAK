@@ -21,5 +21,4 @@ const router = Router();
 //Routes to home and about page
 router.get('/logs', LogsIncidentList);
 
-
 export default router;
