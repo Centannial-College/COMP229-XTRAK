@@ -11,13 +11,12 @@ Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
 Cathy Da - 301177731 
 -->
-<div class ="container-bottom"></div>
-<div class="container-fluid" style="background-color: #8938F7; height: 100%">  
-    <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-25 mt-5">
+<div class="container-fluid pt-5 flex-grow-1" style="background-color: #8938F7; min-height: 110%">
+    <div class="position-absolute top-50 start-50 translate-middle bg-light p-4 w-25 mt-5">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
               <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Incident</button>
-              <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
               <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Narrative</button>
               <% } %>  
             </div>
@@ -148,7 +147,8 @@ Cathy Da - 301177731
                     placeholder="Enter a comment" 
                     name="incidentNarrative"
                     id="commentInput"
-                    style="height:60px;"></textarea>
+                    style="height:60px;"
+                    required></textarea>
                 </div>  
         
             <div class="d-grid gap-2 mt-3">
@@ -174,12 +174,18 @@ Cathy Da - 301177731
             disabled>
                 <%=incident.incidentNarrative%>
         </textarea><br>
+        <% if (incident.incidentStatus == "Archived") { %>
+            <fieldset disabled="disabled">
+                <% } %>  
         <div class="form-group">
             <label for="floatingTextarea">Add Comments to Narrative</label>
             <textarea rows="40" col="8" id="addToNarrative" class="form-control" style="height: 60px;"></textarea>
         <br>
         <a  href="/incident-list/"><button id="addNar" class="btn btn-outline-primary" type="submit" >Save To Narrative</button></a>
         <% } %>  
+        <% if (incident.incidentStatus == "Archived") { %>
+        </fieldset>
+                <% } %>  
         
         <% if (incident.incidentStatus == "Archived") { %>
         </fieldset>
@@ -228,28 +234,28 @@ document.getElementById("commentInput").placeholder = "Enter a comment";
     
 function checkForChanges(){
 var d = new Date();
-var dateString = "\n" + d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds() + "\n";
+var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
 
    if (titleOrig != document.getElementById("titleI").value){
-    narrativeHistory = narrativeHistory + dateString + ":\n" + "Title change from '" + titleOrig + "' to '" + document.getElementById("titleI").value + "'.\n";
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Title change from '" + titleOrig + "' to '" + document.getElementById("titleI").value + "'.";
    }
    if (desOrig != document.getElementById("incidentD").value){
-    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Description change from '" + desOrig + "' to '" + document.getElementById("incidentD").value + "'.";
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Description change from '" + desOrig + "' to '" + document.getElementById("incidentD").value + "'.";
    }
    if (priorityOrig != document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value){
-    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Priority change from '" + priorityOrig + "' to '" + document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value + "'."; 
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Priority change from '" + priorityOrig + "' to '" + document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value + "'."; 
    }
    if (firstOrig != document.getElementById("firstN").value) {
-    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "First Name change from '" + firstOrig + "' to '" + document.getElementById("firstN").value + "'.";
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "First Name change from '" + firstOrig + "' to '" + document.getElementById("firstN").value + "'.";
    }
    if (lastOrig != document.getElementById("lastN").value){
-    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Last Name change from '" + lastOrig + "' to '" + document.getElementById("lastN").value + "'.";
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Last Name change from '" + lastOrig + "' to '" + document.getElementById("lastN").value + "'.";
    }
    if (emailOrig != document.getElementById("emailA").value){
-    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Email change from '" + emailOrig + "' to '" + document.getElementById("emailA").value + "'.";
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Email change from '" + emailOrig + "' to '" + document.getElementById("emailA").value + "'.";
    }
    if (phoneOrig != document.getElementById("phoneN").value){
-    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Phone change from '" + phoneOrig + "' to '" + document.getElementById("phoneN").value + "'.";
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Phone change from '" + phoneOrig + "' to '" + document.getElementById("phoneN").value + "'.";
    }
 
 }
