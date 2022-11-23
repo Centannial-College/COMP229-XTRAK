@@ -43,12 +43,13 @@ Cathy Da - 301177731
             </div>
             <div class="form-group">
                 <label for="incidentD">Incident Description</label>
-                <input type="text" class="form-control"
+                <textarea class="form-control"
                 id="incidentD"
                 placeholder="Enter the description"
                 name="description" 
                 value="<%= incident.description %>"
-                required>
+                style="height: 60px;"
+                required></textarea>
             </div>
 
             <div class="form-group">
@@ -116,6 +117,9 @@ Cathy Da - 301177731
                 required
                 >
                 </input>
+                <% if (incident.incidentStatus == null) { %> <br>
+                <button class="btn btn-outline-primary" type="submit" ><i class="fas fa-edit"></i> Submit</button>
+                <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a> <% } %>
             </div>
               
             <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
@@ -141,14 +145,15 @@ Cathy Da - 301177731
                 </div>
                 <div class="form-group" id="commentBox">
                     <label for="commentBox" id="commentlabel">Comment Required</label>
-                    <input type="text" class="form-control"
+                    <textarea rows="40" col="8"class="form-control"
                     placeholder="Enter a comment" 
                     name="incidentNarrative"
-                    id="commentInput">
-                    </input>
+                    id="commentInput"
+                    style="height:60px;"></textarea>
                 </div>  
         
             <div class="d-grid gap-2 mt-3">
+
                 <button class="btn btn-outline-primary" onclick="checkForChanges(); populateNarrative(); " type="submit" ><i class="fas fa-edit"></i> Submit</button>
                 <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
             </div>
@@ -166,15 +171,15 @@ Cathy Da - 301177731
         </div><br>
         <div class="form-floating">Narrative
             <label for="floatingTextarea"></label>
-            <textarea rows="400" cols="333" class="form-control resize" id="narrativeBox" style="height: 230px"
+            <textarea rows="400" col="8" class="form-control resize" id="narrativeBox" style="height: 230px;"
             disabled>
                 <%=incident.incidentNarrative%>
         </textarea><br>
-        <div class="form-group">Add Comments to Narrative
-            <label for="floatingTextarea"></label>
-            <input type="text" id="addToNarrative" class="form-control">
+        <div class="form-group">
+            <label for="floatingTextarea">Add Comments to Narrative</label>
+            <textarea rows="40" col="8" id="addToNarrative" class="form-control" style="height: 60px;"></textarea>
         <br>
-        <a  href="/incident-list"><button id="addNar" class="btn btn-outline-primary" type="submit" >Save To Narrative</button></a>
+        <a  href="/incident-list/"><button id="addNar" class="btn btn-outline-primary" type="submit" >Save To Narrative</button></a>
         <% } %>  
         
         <% if (incident.incidentStatus == "Archived") { %>
@@ -186,11 +191,6 @@ Cathy Da - 301177731
 </div>
 </div>
 </div>
-
-
-
-
-
 
 <script>
     //Load original values 
@@ -205,8 +205,9 @@ Cathy Da - 301177731
     var phoneOrig = document.getElementById("phoneN").value;
     var narrativeHistory = document.getElementById("narrativeBox").value;
     var changeTypeInput;
-     var output;
+    var output;
    document.getElementById("commentBox").style.display = "none"; 
+  document.getElementById("narrativeBox").innerHTML = narrativeHistory.replace(/\r?\n/g, '&#13;&#10;');
 
 //HIDE|SHOW COMMENT ON STATUS CHANGE
 function changeStatus(){
@@ -216,34 +217,40 @@ function changeStatus(){
     if (value == selectOrig) {
         document.getElementById("commentBox").style.display = "none";
     }
+    if (value == "Archived"){
+document.getElementById("commentlabel").innerHTML = "Incident Resolution";
+document.getElementById("commentInput").placeholder = "Incident Resolution";
+    }
+    else {
+        document.getElementById("commentlabel").innerHTML = "Comment Required";
+document.getElementById("commentInput").placeholder = "Enter a comment";
+    }
 }
     
 function checkForChanges(){
-var date = new Date();
-var day = String(date.getDate()).padStart(2, '0');
-var mon = String(date.getMonth() + 1).padStart(2, '0'); 
-var year = date.getFullYear();
-date = mon + '/' + day + '/' + year;
+var d = new Date();
+var dateString = "\n" + d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds() + "\n";
+
    if (titleOrig != document.getElementById("titleI").value){
-    narrativeHistory = narrativeHistory + "\r\n" + date + ": " + "Title change from '" + titleOrig + "' to '" + document.getElementById("titleI").value + "'.";
+    narrativeHistory = narrativeHistory + dateString + ":\n" + "Title change from '" + titleOrig + "' to '" + document.getElementById("titleI").value + "'.\n";
    }
    if (desOrig != document.getElementById("incidentD").value){
-    narrativeHistory = narrativeHistory + "\r\n" + date + ": " + "Description change from '" + desOrig + "' to '" + document.getElementById("incidentD").value + "'.";
+    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Description change from '" + desOrig + "' to '" + document.getElementById("incidentD").value + "'.";
    }
    if (priorityOrig != document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value){
-    narrativeHistory = narrativeHistory + "\r\n" + date + ": " + "Priority change from '" + priorityOrig + "' to '" + document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value + "'."; 
+    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Priority change from '" + priorityOrig + "' to '" + document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value + "'."; 
    }
    if (firstOrig != document.getElementById("firstN").value) {
-    narrativeHistory = narrativeHistory + "\r\n" + date + ": " + "First Name change from '" + firstOrig + "' to '" + document.getElementById("firstN").value + "'.";
+    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "First Name change from '" + firstOrig + "' to '" + document.getElementById("firstN").value + "'.";
    }
    if (lastOrig != document.getElementById("lastN").value){
-    narrativeHistory = narrativeHistory + "\r\n" + date + ": " + "Last Name change from '" + lastOrig + "' to '" + document.getElementById("lastN").value + "'.";
+    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Last Name change from '" + lastOrig + "' to '" + document.getElementById("lastN").value + "'.";
    }
    if (emailOrig != document.getElementById("emailA").value){
-    narrativeHistory = narrativeHistory + "\r\n" + date + ": " + "Email change from '" + emailOrig + "' to '" + document.getElementById("emailA").value + "'.";
+    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Email change from '" + emailOrig + "' to '" + document.getElementById("emailA").value + "'.";
    }
    if (phoneOrig != document.getElementById("phoneN").value){
-    narrativeHistory = narrativeHistory + "\r\n" + date + ": " + "Phone change from '" + phoneOrig + "' to '" + document.getElementById("phoneN").value + "'.";
+    narrativeHistory = narrativeHistory + "\r\n" + dateString + ": " + "Phone change from '" + phoneOrig + "' to '" + document.getElementById("phoneN").value + "'.";
    }
 
 }
@@ -251,14 +258,12 @@ date = mon + '/' + day + '/' + year;
 function populateNarrative(){
 var select = document.getElementById("ChangeStatus");
 var value = select.options[select.selectedIndex].value;
-var date = new Date();
-var day = String(date.getDate()).padStart(2, '0');
-var mon = String(date.getMonth() + 1).padStart(2, '0'); 
-var year = date.getFullYear();
+var d = new Date();
+var dateString =  d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
 if (selectOrig != value){
 date = mon + '/' + day + '/' + year;
 var comment = "Status change from '" + selectOrig + "' to '" + value +"' ~ Comment: " + document.getElementById("commentInput").value;
-output =  narrativeHistory + "\r" + date + ": " + comment + "\r";
+output =  narrativeHistory + "\n" + dateString + ":\n" + comment;
 document.getElementById("commentInput").value = output;
 document.getElementById("commentBox").style.visibility = "hidden";}
 else {
@@ -266,17 +271,13 @@ else {
 }
 
 }
-
-document.getElementById("addNar").addEventListener("click", addToNarrative);
+    document.getElementById("addNar").addEventListener("click", addToNarrative);
 function addToNarrative(){
 var narrativeHistory = document.getElementById("narrativeBox").value;
-var date = new Date();
-var day = String(date.getDate()).padStart(2, '0');
-var mon = String(date.getMonth() + 1).padStart(2, '0'); 
-var year = date.getFullYear();
-date = mon + '/' + day + '/' + year;
+var d = new Date();
+var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
 var comment = "Comment: " + document.getElementById("addToNarrative").value;
-output =  narrativeHistory + '\r\n' + date + ": " + comment;
+output =  narrativeHistory + "\n" + dateString + ":\n" + comment;
 document.getElementById("commentInput").value = output;
 document.getElementById("addToNarrative").style.visibility = "hidden";
 }
