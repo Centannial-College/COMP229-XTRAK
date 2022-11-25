@@ -15,10 +15,11 @@ Cathy Da - 301177731
 */
 import { Router } from "express";
 import { LogsIncidentList } from "../controllers/logs.controller.server.js";
+import { AuthGuard } from "../utils/index.js";
 
 const router = Router();
 
 //Routes to home and about page
-router.get('/logs', LogsIncidentList);
+router.get('/logs', AuthGuard, LogsIncidentList);
 
 export default router;

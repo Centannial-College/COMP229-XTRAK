@@ -93,7 +93,7 @@ export function DisplayIncidentEditPage(req, res, next){
             res.end(err);
         }
 
-        res.render('index', { title: 'Edit Incident', page: 'incident/edit', incident: incident, userID: UserID(req), displayName: UserDisplayName(req) });
+        res.render('index', { title: 'Edit Incident', page: 'incident/edit', incident: incident, messages: req.flash('confirmationMessage'), userID: UserID(req), displayName: UserDisplayName(req) });
     });
 }
 
@@ -121,7 +121,8 @@ export function ProcessIncidentEditPage(req, res, next){
             res.end(err);
         };
 
-        res.redirect('/incident-list')
+        req.flash('confirmationMessage', 'Changes saved!');
+        res.redirect('back');
     } )
 }
 
