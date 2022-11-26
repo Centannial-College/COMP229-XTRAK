@@ -1,6 +1,6 @@
 {
   "name": "xTrack",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Incident Reporting & Tracking",
   "main": "server.js",
   "type": "module",
