@@ -1,6 +1,6 @@
 /*
 File: incident.js
-Date: 10.11.2022
+Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
@@ -19,13 +19,16 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const incidentSchema = new Schema({
+    incidentTitle: String,
+    incidentStatus: String,
+    incidentNarrative: String,
     recordNumber: String,
     description: String,
     priority: String,
     firstName: String,
     lastName: String,
     emailAddress: String,
-    phoneNumber: String, 
+    phoneNumber: String
 }, {
     timestamps: true,
     collection: 'incident'

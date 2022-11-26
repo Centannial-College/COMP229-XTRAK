@@ -1,6 +1,6 @@
 /*
 File: incident.route.server.js
-Date: 10.11.2022
+Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
@@ -20,6 +20,7 @@ import { DisplayIncidentList,
     ProcessIncidentAddPage, 
     ProcessIncidentEditPage, 
     DisplayIncidentEditPage,
+    DisplayIncidentViewPage,
     ProcessIncidentDelete} from "../controllers/incident.controller.server.js";
 
 import { AuthGuard } from "../utils/index.js";
@@ -36,6 +37,9 @@ router.post('/incident-add', AuthGuard, ProcessIncidentAddPage);
 //edit database item and processes them
 router.post('/incident-edit/:id', AuthGuard, ProcessIncidentEditPage);
 router.get('/incident-edit/:id', AuthGuard, DisplayIncidentEditPage);
+
+//Display Incident Details page
+router.get('/incident-view/:id', AuthGuard, DisplayIncidentViewPage);
 
 //deletes item from database
 router.get('/incident-delete/:id', AuthGuard, ProcessIncidentDelete);

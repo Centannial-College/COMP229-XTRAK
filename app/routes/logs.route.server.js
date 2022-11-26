@@ -1,5 +1,5 @@
 /*
-File: index.route.server.js
+File: logs.route.server.js
 Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
@@ -14,14 +14,12 @@ Danill Velykyi - 301183618
 Cathy Da - 301177731 
 */
 import { Router } from "express";
-import { displayAboutPage,
-    displayHomePage } from "../controllers/index.controller.server.js";
+import { LogsIncidentList } from "../controllers/logs.controller.server.js";
+import { AuthGuard } from "../utils/index.js";
 
 const router = Router();
 
 //Routes to home and about page
-router.get('/', displayHomePage);
-router.get('/home', displayHomePage);
-router.get('/about', displayAboutPage);
+router.get('/logs', AuthGuard, LogsIncidentList);
 
 export default router;

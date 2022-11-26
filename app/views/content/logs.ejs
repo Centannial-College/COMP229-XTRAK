@@ -1,0 +1,43 @@
+<!--
+File: list.ejs
+Date: 25.11.2022
+
+NAME: xTrak - Incident Reporting
+Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
+
+---- DEVELOPERS ----
+Tim Upton – 301259058
+Pedro Da Silva Dergado – 301239283
+Alex Damovski – 301192233
+Tyler Mercier – STUDENT NUM
+Danill Velykyi - 301183618
+Cathy Da - 301177731
+-->
+
+<div class="container-fluid" style="background-color: #8938F7; height: 100%">
+    <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-75 min-width2">
+        <h3 class="text-center">Log List</h3>
+        <hr>
+        <!-- Table with values from database -->
+        <table class="table table-striped table-hover">
+            <thead class="table-striped">
+                <tr>
+                    <th scope="col" class="text-center">ID</th>
+                    <th scope="col" class="text-center">Date</th>
+                    <th scope="col" class="text-center">user(Type)</th>
+                    <th scope="col" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody id="contactList">
+                 <% for(let count = 0; count < logs.length; count++) { %>
+                     <tr>
+                        <th scope="row" class="text-center"><%= count + 1 %></th>
+                            <td class="text-center"><%= logs[count].date %></td>
+                            <td class="text-center"><%= logs[count].username %>(<%= logs[count].userType %>)</td>
+                            <td class="text-center"><%= logs[count].action %></td>
+                     </tr>
+                 <% } %>
+             </tbody>
+        </table>
+    </div>
+</div>

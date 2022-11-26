@@ -1,10 +1,8 @@
 <!--
 File: edit.ejs
-Date: 10.11.2022
-
+Date: 25.11.2022
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
-
 ---- DEVELOPERS ----
 Tim Upton – 301259058 
 Pedro Da Silva Dergado – 301239283 
@@ -14,94 +12,284 @@ Danill Velykyi - 301183618
 Cathy Da - 301177731 
 -->
 <div class ="container-bottom"></div>
-<div class="container-fluid" style="background-color: #8938F7; height: 100%">  
-    <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 w-25">
-        <h3 class="text-center"><%= title %></h3>
-        <hr>
-        <!-- Form -->
+<div class="container-fluid" style="background-color: #8938F7; height: 100%">
+    <div class="position-absolute top-50 start-50 translate-middle bg-light p-4 w-25 mt-5 mb-5">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Incident</button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Narrative</button>
+                <% } %>  
+            </div>
+        </nav>
         <form class="form" method="POST">
-            <input type="hidden" name="id" value="<%= incident._id %>" >
-            <div class="form-group">
-                <label for="incidentD">Incident Description</label>
-                <input type="text" class="form-control"
-                id="incidentD"
-                placeholder="Enter the description"
-                name="description" 
-                value="<%= incident.description %>"
-                required>
-            </div>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"><br>
+                <% if(messages.length > 0) { %>
+                    <div id="messageArea" class="alert alert-success">
+                      <%= messages %>
+                    </div>
+                <% } %>
+                <h3 class="text-center"><%= title %></h3>
+                <hr>
+                 <!-- Form -->
+                    <% if (incident.incidentStatus == "Archived") { %>
+                        <fieldset disabled="disabled">
+                    <% } %>  
+                    <input type="hidden" name="id" value="<%= incident._id %>" >
+                    <div class="form-group">
+                        <label for="titleI">Incident Title</label>
+                        <input type="text" class="form-control"
+                        id="titleI"
+                        placeholder="Enter a Title"
+                        name="incidentTitle" 
+                        value="<%= incident.incidentTitle %>"
+                        required>
+                    </div>
+                    <div class="form-group">
+                        <label for="incidentD">Incident Description</label>
+                        <textarea class="form-control"
+                        id="incidentD"
+                        placeholder="Enter the description"
+                        name="description" 
+                        style="height: 60px;"
+                        required><%= incident.description %></textarea>
+                    </div>
 
-            <div class="form-group">
-                <label for="priorityT">Priority type</label>
-                <select class="form-select" aria-label="Priority type" name="priority">
-                    <% if (incident.priority == "Low") { %>
-                            <option value="Low" selected>Low</option>
-                        <% } else { %>
-                            <option value="Low">Low</option>
+                    <div class="form-group">
+                        <label for="priorityT">Priority type</label>
+                        <select class="form-select" aria-label="Priority type" name="priority" id="priorityS" >
+                            <% if (incident.priority == "Low") { %>
+                                    <option value="Low" selected>Low</option>
+                            <% } else { %>
+                                    <option value="Low">Low</option>
+                             <% } %>
+                             <% if (incident.priority == "Normal") { %>
+                                    <option value="Normal" selected>Normal</option>
+                            <% } else { %>
+                                    <option value="Normal">Normal</option>
+                            <% } %>
+                            <% if (incident.priority == "High") { %>
+                                    <option value="High" selected>High</option>
+                            <% } else { %>
+                                    <option value="High">High</option>
+                             <% } %>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstN">First Name</label>
+                        <input type="text" class="form-control"
+                        id="firstN"
+                        placeholder="Enter first name"
+                        name="firstName" 
+                        value="<%= incident.firstName %>"
+                        required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastN">Last Name</label>
+                        <input type="text" class="form-control"
+                        id="lastN"
+                        placeholder="Enter last name"
+                        name="lastName"                     
+                        value="<%= incident.lastName %>"
+                        required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailA">Email Address</label>
+                        <input type="text" class="form-control"
+                        id="emailA"
+                        placeholder="Enter email address"
+                        name="emailAddress"                     
+                        value="<%= incident.emailAddress %>"
+                        required 
+                        >
+                    </div>
+           
+                    <div class="form-group">
+                        <label for="phoneN">Phone Number</label>
+                        <input type="text" class="form-control"
+                        id="phoneN"
+                        placeholder="Enter phone number"
+                        name="phoneNumber"                     
+                        value="<%= incident.phoneNumber %>"
+                        required
+                        >
+                        <% if (incident.incidentStatus == null) { %>
+                            <br>
+                            <button class="btn btn-outline-primary" type="submit" ><i class="fas fa-edit"></i> Submit</button>
+                            <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
                         <% } %>
-                        <% if (incident.priority == "Normal") { %>
-                            <option value="Normal" selected>Normal</option>
-                        <% } else { %>
-                            <option value="Normal">Normal</option>
-                        <% } %>
-                        <% if (incident.priority == "High") { %>
-                            <option value="High" selected>High</option>
-                        <% } else { %>
-                            <option value="High">High</option>
-                        <% } %>
-                </select>
-            </div>
+                    </div>
+                        </fieldset>
+              
+                    <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
+                        <div class="form-group">
+                            <label for="priorityT">Status</label>
+                            <select class="form-select" aria-label="Status" name="incidentStatus" id="ChangeStatus" onchange="changeStatus()">
+                                <% if (incident.incidentStatus == "New") { %>
+                                        <option value="New" selected>New</option>
+                                    <% } else { %>
+                                        <option value="New">New</option>
+                                    <% } %>
+                                    <% if (incident.incidentStatus == "Active") { %>
+                                        <option value="Active" selected>Active</option>
+                                    <% } else { %>
+                                        <option value="Active">Active</option>
+                                    <% } %>
+                                    <% if (incident.incidentStatus == "Archived") { %>
+                                        <option value="Archived" selected>Archive</option>
+                                    <% } else { %>
+                                        <option value="Archived">Archive</option>
+                                    <% } %>
+                            </select>
+                        </div>
+                        <div class="form-group" id="commentBox">
+                            <label for="commentBox" id="commentlabel">Comment Required</label>
+                            <textarea rows="40" col="8"class="form-control"
+                            placeholder="Enter a comment" 
+                            name="incidentNarrative"
+                            id="commentInput"
+                            style="height:60px;"
+                            required></textarea>
+                        </div>  
+        
+                        <div class="d-grid gap-2 mt-3">
 
-            <div class="form-group">
-                <label for="firstN">First Name</label>
-                <input type="text" class="form-control"
-                id="firstN"
-                placeholder="Enter first name"
-                name="firstName" 
-                value="<%= incident.firstName %>"
-                required>
-            </div>
+                            <button class="btn btn-outline-primary" onclick="checkForChanges(); populateNarrative(); " type="submit" ><i class="fas fa-edit"></i> Submit</button>
+                            <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
+                        </div>
+                    
+                    <% } %>
+                </div>
 
-            <div class="form-group">
-                <label for="lastN">Last Name</label>
-                <input type="text" class="form-control"
-                id="lastN"
-                placeholder="Enter last name"
-                name="lastName"                     
-                value="<%= incident.lastName %>"
-                required
-                >
-                </input>
-            </div>
-
-            <div class="form-group">
-                <label for="emailA">Email Address</label>
-                <input type="text" class="form-control"
-                id="emailA"
-                placeholder="Enter email address"
-                name="emailAddress"                     
-                value="<%= incident.emailAddress %>"
-                required
-                >
-                </input>
-            </div>
-
-            <div class="form-group">
-                <label for="phoneN">Phone Number</label>
-                <input type="text" class="form-control"
-                id="phoneN"
-                placeholder="Enter the phoneNumber"
-                name="phoneNumber"                     
-                value="<%= incident.phoneNumber %>"
-                required
-                >
-                </input>
-            </div>
-            
-            <div class="d-grid gap-2 mt-3">
-                <button class="btn btn-outline-primary" type="submit"><i class="fas fa-edit"></i> Submit</button>
-                <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
-            </div>
+            <!-- NARRATIVE TAB CONTENTS-->
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                    <div class ="" height="500px">
+                        <div class="form-group"><br>
+                            <label for="phoneN">Date Opened (DD-MM-YYYY)</label>
+                            <input type="text" class="form-control" id="incidentDate" name="incidentDate"                     
+                            value="<%=incident.recordNumber.substring(0,2)%>-<%=incident.recordNumber.substring(2,4)%>-<%=incident.recordNumber.substring(4,8)%>"
+                            disabled>
+                            </input>
+                        </div><br>
+                        <div class="form-floating">Narrative
+                            <label for="floatingTextarea"></label>
+                            <textarea rows="400" col="8" class="form-control resize" id="narrativeBox" style="height: 230px;"
+                                disabled>
+                                <%=incident.incidentNarrative%>
+                            </textarea><br>
+                            <% if (incident.incidentStatus == "Archived") { %>
+                                <fieldset disabled="disabled">
+                            <% } %>  
+                                <div class="form-group">
+                                    <label for="floatingTextarea">Add Comments to Narrative</label>
+                                    <textarea rows="40" col="8" id="addToNarrative" class="form-control" style="height: 60px;"></textarea>
+                                    <br>
+                                    <% if (incident.incidentStatus != "Archived") { %>
+                                    <a  href="/incident-list/"><button id="addNar" class="btn btn-outline-primary" type="submit" >Save To Narrative</button></a>
+                                    <% } %>
+                                </div>
+                                </fieldset>
+                        </div>
+                    </div>
+                </div>
+        </div>
         </form>
     </div>
 </div>
+
+<script>
+    //Load original values 
+     var selectOrig = document.getElementById("ChangeStatus").options[document.getElementById("ChangeStatus").selectedIndex].value;
+     var titleOrig = document.getElementById("titleI").value;
+     var desOrig = document.getElementById("incidentD").value;
+     var priority = document.getElementById("priorityS");
+        var priorityOrig = priority.options[priority.selectedIndex].value;
+    var firstOrig = document.getElementById("firstN").value;
+    var lastOrig = document.getElementById("lastN").value;
+    var emailOrig = document.getElementById("emailA").value;
+    var phoneOrig = document.getElementById("phoneN").value;
+    var narrativeHistory = document.getElementById("narrativeBox").value;
+    var changeTypeInput;
+    var output;
+   document.getElementById("commentBox").style.display = "none"; 
+  document.getElementById("narrativeBox").innerHTML = narrativeHistory.replace(/\r?\n/g, '&#13;&#10;');
+
+//HIDE|SHOW COMMENT ON STATUS CHANGE
+function changeStatus(){
+    document.getElementById("commentBox").style.display = "block";
+    var select = document.getElementById("ChangeStatus");
+    var value = select.options[select.selectedIndex].value;
+    if (value == selectOrig) {
+        document.getElementById("commentBox").style.display = "none";
+    }
+    if (value == "Archived"){
+document.getElementById("commentlabel").innerHTML = "Incident Resolution";
+document.getElementById("commentInput").placeholder = "Incident Resolution";
+    }
+    else {
+        document.getElementById("commentlabel").innerHTML = "Comment Required";
+document.getElementById("commentInput").placeholder = "Enter a comment";
+    }
+}
+    
+function checkForChanges(){
+var d = new Date();
+var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
+
+   if (titleOrig != document.getElementById("titleI").value){
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Title change from '" + titleOrig + "' to '" + document.getElementById("titleI").value + "'.";
+   }
+   if (desOrig != document.getElementById("incidentD").value){
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Description change from '" + desOrig + "' to '" + document.getElementById("incidentD").value + "'.";
+   }
+   if (priorityOrig != document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value){
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Priority change from '" + priorityOrig + "' to '" + document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value + "'."; 
+   }
+   if (firstOrig != document.getElementById("firstN").value) {
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "First Name change from '" + firstOrig + "' to '" + document.getElementById("firstN").value + "'.";
+   }
+   if (lastOrig != document.getElementById("lastN").value){
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Last Name change from '" + lastOrig + "' to '" + document.getElementById("lastN").value + "'.";
+   }
+   if (emailOrig != document.getElementById("emailA").value){
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Email change from '" + emailOrig + "' to '" + document.getElementById("emailA").value + "'.";
+   }
+   if (phoneOrig != document.getElementById("phoneN").value){
+    narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Phone change from '" + phoneOrig + "' to '" + document.getElementById("phoneN").value + "'.";
+   }
+
+}
+ //POPULATE NARRATIVE WHEN STATUS CHANGE HAPPENS WITH COMMENT
+function populateNarrative(){
+var select = document.getElementById("ChangeStatus");
+var value = select.options[select.selectedIndex].value;
+var d = new Date();
+var dateString =  d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
+if (selectOrig != value){
+date = mon + '/' + day + '/' + year;
+var comment = "Status change from '" + selectOrig + "' to '" + value +"' ~ Comment: " + document.getElementById("commentInput").value;
+output =  narrativeHistory + "\n" + dateString + ":\n" + comment;
+document.getElementById("commentInput").value = output;
+document.getElementById("commentBox").style.visibility = "hidden";}
+else {
+    document.getElementById("commentInput").value = narrativeHistory;
+}
+
+}
+    document.getElementById("addNar").addEventListener("click", addToNarrative);
+function addToNarrative(){
+var narrativeHistory = document.getElementById("narrativeBox").value;
+var d = new Date();
+var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
+var comment = "Comment: " + document.getElementById("addToNarrative").value;
+output =  narrativeHistory + "\n" + dateString + ":\n" + comment;
+document.getElementById("commentInput").value = output;
+document.getElementById("addToNarrative").style.visibility = "hidden";
+}
+
+</script>

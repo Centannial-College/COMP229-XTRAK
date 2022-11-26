@@ -1,5 +1,5 @@
-/*
-File: index.route.server.js
+<!--
+File: edit.ejs
 Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
@@ -12,16 +12,8 @@ Alex Damovski – 301192233
 Tyler Mercier – STUDENT NUM 
 Danill Velykyi - 301183618
 Cathy Da - 301177731 
-*/
-import { Router } from "express";
-import { displayAboutPage,
-    displayHomePage } from "../controllers/index.controller.server.js";
+-->
 
-const router = Router();
+<h1>View INCIDENT</h1>
 
-//Routes to home and about page
-router.get('/', displayHomePage);
-router.get('/home', displayHomePage);
-router.get('/about', displayAboutPage);
-
-export default router;
+<!--// SIMILAR TO EDIT PG, BUT DISPLAYS ALL DETAILS FOR EACH INCIDENT -->

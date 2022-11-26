@@ -1,6 +1,6 @@
 <!--
 File: profile.ejs
-Date: 10.11.2022
+Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
@@ -13,3 +13,57 @@ Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
 Cathy Da - 301177731 
 -->
+
+<div class ="container-bottom"></div>
+<div class="container-fluid" style="background-color: #8938F7; height: 100%">
+  <div class="position-absolute top-50 start-50 translate-middle bg-light p-5 rounded-4">
+    <% if(messages.length > 0) { %>
+        <div id="messageArea" class="alert alert-success ">
+          <%= messages %>
+        </div>
+      <% } %> 
+    <form method="POST" id="registerForm" novalidate>
+        <input type="hidden" name="id" value="<%= user._id %>">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="firstName">First Name</label>
+                    <input class="form-control" type="text" name="firstName" id="firstName" value= "<%= user.firstName %>" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName">Last Name</label>
+                    <input class="form-control" type="text" name="lastName" id="lastName" value= "<%= user.lastName %>" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-4">
+            <div class="col-md-12">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username"  required
+                value= "<%= user.username %>" disabled>
+            </div>
+            <div class="form-group mt-4">
+                <label for="userType">User Type</label>
+                <input type="text" class="form-control" id="IDuserType" name="userType" required value= "<%= user.userType %>" disabled>
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="emailAddress" name="emailAddress" required
+                    value= "<%= user.emailAddress %>">
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4 btn-group">
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button  id="submitButton" type="submit" class="btn btn-outline-primary">Save</button>
+                <a href="/profile-delete/<%= userID %>" class="btn btn-outline-danger">Delete</a>
+                <a href='/' class="btn btn-outline-secondary"> Cancel</a>
+              </div>
+          </div>            
+    </form>             
+    </div>
+</div>

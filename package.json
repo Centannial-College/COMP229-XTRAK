@@ -1,6 +1,6 @@
 {
   "name": "xTrack",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Incident Reporting & Tracking",
   "main": "server.js",
   "type": "module",
@@ -12,6 +12,7 @@
   "author": "xTrack",
   "license": "ISC",
   "dependencies": {
+    "ascii-converter": "^1.1.5",
     "body-parser": "^1.20.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",

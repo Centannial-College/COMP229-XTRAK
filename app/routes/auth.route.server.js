@@ -1,6 +1,6 @@
 /*
 File: auth.route.server.js
-Date: 10.11.2022
+Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
@@ -15,7 +15,6 @@ Cathy Da - 301177731
 */
 import {Router} from 'express';
 import { DisplayLoginPage, 
-    displayProfilePage, 
     DisplayRegisterPage, 
     ProcessLoginPage,
     ProcessLogoutPage,
@@ -36,7 +35,5 @@ router.post('/register', ProcessRegisterPage);
 
 // Process Logout Page
 router.get('/logout', ProcessLogoutPage);
-
-router.get('/profile', displayProfilePage);
 
 export default router;

@@ -1,5 +1,5 @@
 /*
-File: index.route.server.js
+File: logs.js
 Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
@@ -13,15 +13,19 @@ Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
 Cathy Da - 301177731 
 */
-import { Router } from "express";
-import { displayAboutPage,
-    displayHomePage } from "../controllers/index.controller.server.js";
 
-const router = Router();
+import mongoose from 'mongoose';
 
-//Routes to home and about page
-router.get('/', displayHomePage);
-router.get('/home', displayHomePage);
-router.get('/about', displayAboutPage);
+const Schema = mongoose.Schema;
 
-export default router;
+const logsSchema = new Schema({
+    date: String,
+    username: String,
+    userType: String,
+    action: String
+}, {
+    timestamps: true,
+    collection: 'logs'
+});
+
+export default mongoose.model('Logs', logsSchema);

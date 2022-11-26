@@ -1,6 +1,6 @@
 /*
 File: index.js
-Date: 10.11.2022
+Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
@@ -20,6 +20,13 @@ import { Secret } from '../../config/config.js';
 export function UserDisplayName(req){
     if(req.user){
         return req.user.displayName;
+    }
+    return '';
+}
+
+export function UserID(req){
+    if(req.user){
+        return req.user._id;
     }
     return '';
 }

@@ -1,6 +1,6 @@
 /*
 File: auth.controller.server.js
-Date: 10.11.2022
+Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
 Description: xTrak is a web app platform to capture data for incident. The reports are saved and organized in a list. 
@@ -73,7 +73,9 @@ export function ProcessRegisterPage(req, res, next){
         username: req.body.username,
         emailAddress: req.body.emailAddress,
         displayName: req.body.firstName + " " + req.body.lastName,
-        userType: req.body.userType
+        userType: req.body.userType,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
     });
 
     User.register(newUser, req.body.password, function(err){
@@ -108,7 +110,3 @@ export function ProcessLogoutPage(req, res, next){
 
     res.redirect('/login');
 }
-
-export function displayProfilePage(req, res, next){
-    res.render('index', { title: 'Profile', page: 'profile', displayName: UserDisplayName(req)} );
-};
