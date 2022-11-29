@@ -165,7 +165,7 @@ Cathy Da - 301177731
                     
                     <% } %>
                 </div>
-
+                <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
             <!-- NARRATIVE TAB CONTENTS-->
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                     <div class ="" height="500px">
@@ -197,6 +197,7 @@ Cathy Da - 301177731
                         </div>
                     </div>
                 </div>
+                <% } %>
         </div>
         </form>
     </div>
