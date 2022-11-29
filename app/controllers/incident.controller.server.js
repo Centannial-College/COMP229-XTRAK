@@ -40,7 +40,7 @@ export function DisplayIncidentList(req, res, next){
 
 //displays page to add new item to database
 export function DisplayIncidentAddPage(req, res, next){
-    res.render('index', { title: 'Add Incident', page: 'incident/edit', incident: {}, userID: UserID(req), displayName: UserDisplayName(req) });
+    res.render('index', { title: 'Add Incident', page: 'incident/edit', incident: {}, userID: UserID(req), messages: req.flash('confirmationMessage'), displayName: UserDisplayName(req) });
 }
 
 
