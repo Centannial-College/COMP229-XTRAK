@@ -18,16 +18,21 @@ import incidentModel from '../models/incident.js';
 
 import { UserDisplayName, UserID } from '../utils/index.js';
 import logsModel from '../models/logs.js';
+import countersModel from '../models/counters.js';
+import EventEmitter from 'events'
 
     let currentDate = new Date();
     let day = currentDate.getDate().toString();
     let month = (currentDate.getMonth() + 1).toString();
     let year = currentDate.getFullYear().toString();
     let time = currentDate.toTimeString().split(' ')[0];
-    let newTicketNumber = day + month + year + "-00000";
+    let newTicketNumber = day + month + year + "-0000";
 
 //gets all incidents in database
 export function DisplayIncidentList(req, res, next){
+  
+    
+
     incidentModel.find(function(err, incidentCollection) {
         if(err){
             console.error(err);
@@ -46,53 +51,76 @@ export function DisplayIncidentAddPage(req, res, next){
 
 //process information to the database
 export function ProcessIncidentAddPage(req, res, next){
-    let newIncident = incidentModel({
-        incidentTitle: req.body.incidentTitle,
-        incidentStatus: "New",
-        incidentNarrative: req.body.incidentNarrative,
-        recordNumber: newTicketNumber,
-        description: req.body.description,
-        priority: req.body.priority,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        emailAddress: req.body.emailAddress,
-        phoneNumber: req.body.phoneNumber
-    });
-
-    let newLog = logsModel({
-        log_id: req.body.id,
-        date: day + "-" + month + "-" + year + " " + time,
-        username: req.user.username,
-        userType: req.user.userType,
-        action: "Create a new incident #" + newTicketNumber
+    let emitter = new EventEmitter.EventEmitter();
+    emitter.on('c1', function (){
+        countersModel.findOneAndUpdate({_id: {"coll": "incident"}}, { $inc: { incidentId: 1 }}, {returnNewDocument: true, upsert : true, new: true}, (err, res) => {
+            if (err) {
+                console.error(err);
+                res.end(err);
+            }
+            newTicketNumber += res.incidentId;
+            console.log("Function output - " + res.incidentId + " && " + newTicketNumber);
+        });
+        console.log("Finish c1");
     })
-    //adding to logs this action
-    logsModel.create(newLog, (err, Incident) => {
-        if(err){
-            console.error(err);
-            res.end(err);
-        };
-    } )
-    incidentModel.create(newIncident, (err, Incident) => {
-        if(err){
-            console.error(err);
-            res.end(err);
-        };
 
-        res.redirect('/incident-list')
-    } )
+    emitter.emit('c1');
+    setTimeout(() => {
+        console.log("Delayed for 0.1 second and starting c2.");
+        emitter.emit('c2');
+    }, 200)
+
+    emitter.on('c2', function (){
+        console.log("Function output - " + newTicketNumber);
+        let newIncident = incidentModel({
+            incidentTitle: req.body.incidentTitle,
+            incidentStatus: "New",
+            incidentNarrative: req.body.incidentNarrative,
+            recordNumber: newTicketNumber,
+            description: req.body.description,
+            priority: req.body.priority,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            emailAddress: req.body.emailAddress,
+            phoneNumber: req.body.phoneNumber
+        });
+    
+        let newLog = logsModel({
+            log_id: req.body.id,
+            date: day + "-" + month + "-" + year + " " + time,
+            username: req.user.username,
+            userType: req.user.userType,
+            action: "Create a new incident #" + newTicketNumber
+        });
+        
+        //adding to logs this action
+        logsModel.create(newLog, (err, Incident) => {
+            if(err){
+                console.error(err);
+                res.end(err);
+            };
+        });
+        incidentModel.create(newIncident, (err, Incident) => {
+            if(err){
+                console.error(err);
+                res.end(err);
+            };
+    
+            res.redirect('/incident-list')
+        });
+        newTicketNumber = day + month + year + "-0000";
+        console.log("Finish C2")
+    })
 }
 
 //edit current item in database with the id 
 export function DisplayIncidentEditPage(req, res, next){
     let id = req.params.id;
-
     incidentModel.findById(id, (err, incident) => {
         if(err){
             console.error(err);
             res.end(err);
         }
-
         res.render('index', { title: 'Edit Incident', page: 'incident/edit', incident: incident, messages: req.flash('confirmationMessage'), userID: UserID(req), displayName: UserDisplayName(req) });
     });
 }
@@ -164,7 +192,6 @@ export function ProcessIncidentDelete(req, res, next){
             console.error(err);
             res.end(err);
         }
-
         res.redirect('/incident-list');
     })
 }
