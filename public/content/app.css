@@ -188,3 +188,7 @@ h8 {
   color: white;
   height: 45px;
 }
+
+textarea{
+  max-height: 300px;
+}

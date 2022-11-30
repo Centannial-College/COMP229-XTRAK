@@ -178,16 +178,13 @@ Cathy Da - 301177731
                         </div><br>
                         <div class="form-floating">Narrative
                             <label for="floatingTextarea"></label>
-                            <textarea rows="400" col="8" class="form-control resize" id="narrativeBox" style="height: 230px;"
-                                disabled>
-                                <%=incident.incidentNarrative%>
-                            </textarea><br>
+                            <textarea rows="10" col="8" class="form-control resize" id="narrativeBox" style="height: 150px;" disabled><%=incident.incidentNarrative%></textarea>
                             <% if (incident.incidentStatus == "Archived") { %>
                                 <fieldset disabled="disabled">
                             <% } %>  
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label for="floatingTextarea">Add Comments to Narrative</label>
-                                    <textarea rows="40" col="8" id="addToNarrative" class="form-control" style="height: 60px;"></textarea>
+                                    <textarea rows="10" col="8" id="addToNarrative" class="form-control" style="height: 60px;" ></textarea>
                                     <br>
                                     <% if (incident.incidentStatus != "Archived") { %>
                                     <a  href="/incident-list/"><button id="addNar" class="btn btn-outline-primary" type="submit" >Save To Narrative</button></a>
