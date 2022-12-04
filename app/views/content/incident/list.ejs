@@ -35,15 +35,15 @@ Cathy Da - 301177731
                      <tr>
                         <% if (incident[count].incidentStatus == "New" || incident[count].incidentStatus == "Active") { %>
                         <th scope="row" class="text-center"><%= count + 1 %></th>
-                            <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>"><%= incident[count].recordNumber %></td></a></td>
+                            <td class="text-center"><a href="/incident-edit/<%= incident[count]._id %>&<%= incident[count].recordNumber %>"><%= incident[count].recordNumber %></td></a></td>
                             <td class="text-center"><%= incident[count].incidentTitle %></td>
                             <td class="text-center"><%= incident[count].priority %></td>
                             <td class="text-center"><%= incident[count].incidentStatus %></td>
                          <% if(displayName) { %>
                          <td class="text-center col-1">
-                             <a href="/incident-edit/<%= incident[count]._id %>" class="btn btn-outline-dark btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                             <a href="/incident-edit/<%= incident[count]._id %>&<%= incident[count].recordNumber %>" class="btn btn-outline-dark btn-sm"><i class="fas fa-pencil-alt"></i></a>
                              <% if(user.userType == "Admin") { %>
-                                <a href="/incident-delete/<%= incident[count]._id %>" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                <a href="/incident-delete/<%= incident[count]._id %>&<%= incident[count].recordNumber %>" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                              <% } %>
                          </td>
                          <% } %>

@@ -202,7 +202,7 @@ Cathy Da - 301177731
 
 <script>
     //Load original values 
-     //var selectOrig = document.getElementById("ChangeStatus").options[document.getElementById("ChangeStatus").selectedIndex].value;
+     var selectOrig = document.getElementById("ChangeStatus").options[document.getElementById("ChangeStatus").selectedIndex].value;
      var titleOrig = document.getElementById("titleI").value;
      var desOrig = document.getElementById("incidentD").value;
      var priority = document.getElementById("priorityS");
@@ -234,7 +234,7 @@ document.getElementById("commentInput").placeholder = "Incident Resolution";
 document.getElementById("commentInput").placeholder = "Enter a comment";
     }
 }
-    
+
 function checkForChanges(){
 var d = new Date();
 var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
