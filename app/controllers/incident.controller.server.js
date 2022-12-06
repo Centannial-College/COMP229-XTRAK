@@ -23,6 +23,11 @@ import EventEmitter from 'events'
 
     let currentDate = new Date();
     let day = currentDate.getDate().toString();
+    if (day == "1" || day == "2" || day == "3" || day == "4" || day == "5" || day == "6" || day == "7" || day == "8" || day == "9") {
+        day = "0" + currentDate.getDate().toString();
+    } else {
+        day = currentDate.getDate().toString();
+    }
     let month = (currentDate.getMonth() + 1).toString();
     let year = currentDate.getFullYear().toString();
     let time = currentDate.toTimeString().split(' ')[0];

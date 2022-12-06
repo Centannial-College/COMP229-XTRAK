@@ -159,7 +159,7 @@ Cathy Da - 301177731
         
                         <div class="d-grid gap-2 mt-3">
 
-                            <button class="btn btn-outline-primary" onclick="checkForChanges(); populateNarrative(); " type="submit" ><i class="fas fa-edit"></i> Submit</button>
+                            <button class="btn btn-outline-primary" onclick="checkForChanges(); populateNarrative();" type="submit" ><i class="fas fa-edit"></i> Submit</button>
                             <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
                         </div>
                     
@@ -206,7 +206,7 @@ Cathy Da - 301177731
      var titleOrig = document.getElementById("titleI").value;
      var desOrig = document.getElementById("incidentD").value;
      var priority = document.getElementById("priorityS");
-        var priorityOrig = priority.options[priority.selectedIndex].value;
+    var priorityOrig = priority.options[priority.selectedIndex].value;
     var firstOrig = document.getElementById("firstN").value;
     var lastOrig = document.getElementById("lastN").value;
     var emailOrig = document.getElementById("emailA").value;
@@ -244,10 +244,10 @@ var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYe
    }
    if (desOrig != document.getElementById("incidentD").value){
     narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Description change from '" + desOrig + "' to '" + document.getElementById("incidentD").value + "'.";
-   }
+    }
    if (priorityOrig != document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value){
     narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Priority change from '" + priorityOrig + "' to '" + document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value + "'."; 
-   }
+    }
    if (firstOrig != document.getElementById("firstN").value) {
     narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "First Name change from '" + firstOrig + "' to '" + document.getElementById("firstN").value + "'.";
    }
@@ -265,27 +265,30 @@ var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYe
  //POPULATE NARRATIVE WHEN STATUS CHANGE HAPPENS WITH COMMENT
 function populateNarrative(){
 var select = document.getElementById("ChangeStatus");
-var value = select.options[select.selectedIndex].value;
+var selected = select.options[select.selectedIndex].value;
 var d = new Date();
 var dateString =  d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
-if (selectOrig != value){
-date = mon + '/' + day + '/' + year;
-var comment = "Status change from '" + selectOrig + "' to '" + value +"' ~ Comment: " + document.getElementById("commentInput").value;
+if (selectOrig != selected){
+var comment = "Status change from '" + selectOrig + "' to '" + selected +"' ~ Comment: " + document.getElementById("commentInput").value;
 output =  narrativeHistory + "\n" + dateString + ":\n" + comment;
 document.getElementById("commentInput").value = output;
-document.getElementById("commentBox").style.visibility = "hidden";}
+document.getElementById("commentBox").style.visibility = "hidden";
+
+}
 else {
     document.getElementById("commentInput").value = narrativeHistory;
 }
 
 }
-    document.getElementById("addNar").addEventListener("click", addToNarrative);
+
+document.getElementById("addNar").addEventListener("click", addToNarrative);
 function addToNarrative(){
 var narrativeHistory = document.getElementById("narrativeBox").value;
 var d = new Date();
 var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
 var comment = "Comment: " + document.getElementById("addToNarrative").value;
 output =  narrativeHistory + "\n" + dateString + ":\n" + comment;
+
 document.getElementById("commentInput").value = output;
 document.getElementById("addToNarrative").style.visibility = "hidden";
 }
