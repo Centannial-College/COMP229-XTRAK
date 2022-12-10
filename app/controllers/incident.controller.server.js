@@ -159,7 +159,6 @@ export function ProcessIncidentEditPage(req, res, next){
             console.error(err);
             res.end(err);
         };
-
         req.flash('confirmationMessage', 'Changes saved!');
         res.redirect('back');
     } )
