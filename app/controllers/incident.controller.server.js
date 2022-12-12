@@ -19,7 +19,7 @@ import incidentModel from '../models/incident.js';
 import { UserDisplayName, UserID } from '../utils/index.js';
 import logsModel from '../models/logs.js';
 import countersModel from '../models/counters.js';
-import EventEmitter from 'events'
+import EventEmitter from 'events';
 
     let currentDate = new Date();
     let day = currentDate.getDate().toString();
@@ -53,7 +53,10 @@ export function DisplayIncidentAddPage(req, res, next){
 
 //process information to the database
 export function ProcessIncidentAddPage(req, res, next){
-    emitter.on('c1', function (){
+    var eventEmitterOne = new EventEmitter();
+    var eventEmitterTwo = new EventEmitter();
+
+    eventEmitterOne.on('c1', function (){
         countersModel.findOneAndUpdate({_id: {"coll": "incident"}}, { $inc: { incidentId: 1 }}, {returnNewDocument: true, upsert : true, new: true}, (err, res) => {
             if (err) {
                 console.error(err);
@@ -65,13 +68,13 @@ export function ProcessIncidentAddPage(req, res, next){
         console.log("Finish c1");
     })
 
-    emitter.emit('c1');
+    eventEmitterOne.emit('c1');
     setTimeout(() => {
         console.log("Delayed for 0.1 second and starting c2.");
-        emitter.emit('c2');
+        eventEmitterTwo.emit('c2');
     }, 200)
 
-    emitter.on('c2', function (){
+    eventEmitterTwo.on('c2', function (){
         console.log("Function output - " + newTicketNumber);
         let newIncident = incidentModel({
             incidentTitle: req.body.incidentTitle,
