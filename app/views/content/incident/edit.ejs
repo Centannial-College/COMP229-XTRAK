@@ -12,15 +12,15 @@ Danill Velykyi - 301183618
 Cathy Da - 301177731 
 -->
 <div class ="container-bottom"></div>
-<div class="container-fluid" style="background-color: #8938F7; height: 100%">
-    <div class="position-absolute top-50 start-50 translate-middle bg-light p-4 w-25 mt-5 mb-5">
+<div class="container-fluid d-flex justify-content-center py-4">
+    <div class="bg-light p-4 w-25 mt-5 mb-5 rounded-4">
         <nav>
+            <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <% if (incident.incidentStatus == "New" || incident.incidentStatus == "Active" || incident.incidentStatus == "Archived") { %>
                 <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Incident</button>
                 <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Narrative</button>
-                <% } %>  
             </div>
+            <% } %>  
         </nav>
         <form class="form" method="POST">
         <div class="tab-content" id="nav-tabContent">
@@ -33,10 +33,10 @@ Cathy Da - 301177731
                 <h3 class="text-center"><%= title %></h3>
                 <hr>
                  <!-- Form -->
+                    <input hidden name="id" value="<%= incident._id %>" >
                     <% if (incident.incidentStatus == "Archived") { %>
                         <fieldset disabled="disabled">
                     <% } %>  
-                    <input type="hidden" name="id" value="<%= incident._id %>" >
                     <div class="form-group">
                         <label for="titleI">Incident Title</label>
                         <input type="text" class="form-control"
@@ -119,9 +119,11 @@ Cathy Da - 301177731
                         required
                         >
                         <% if (incident.incidentStatus == null) { %>
-                            <br>
+                            <div class="d-grid gap-2 mt-3">
+
                             <button class="btn btn-outline-primary" type="submit" ><i class="fas fa-edit"></i> Submit</button>
                             <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
+                            </div>
                         <% } %>
                     </div>
                         </fieldset>
@@ -159,7 +161,7 @@ Cathy Da - 301177731
         
                         <div class="d-grid gap-2 mt-3">
 
-                            <button class="btn btn-outline-primary" onclick="checkForChanges(); populateNarrative(); " type="submit" ><i class="fas fa-edit"></i> Submit</button>
+                            <button class="btn btn-outline-primary" onclick="checkForChanges(); populateNarrative();" type="submit" ><i class="fas fa-edit"></i> Submit</button>
                             <a href="/incident-list" class="btn btn-outline-dark"><i class="fas fa-undo"></i> Cancel</a>
                         </div>
                     
@@ -178,16 +180,13 @@ Cathy Da - 301177731
                         </div><br>
                         <div class="form-floating">Narrative
                             <label for="floatingTextarea"></label>
-                            <textarea rows="400" col="8" class="form-control resize" id="narrativeBox" style="height: 230px;"
-                                disabled>
-                                <%=incident.incidentNarrative%>
-                            </textarea><br>
+                            <textarea rows="10" col="8" class="form-control resize" id="narrativeBox" style="height: 200px;" disabled><%=incident.incidentNarrative%></textarea>
                             <% if (incident.incidentStatus == "Archived") { %>
                                 <fieldset disabled="disabled">
                             <% } %>  
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label for="floatingTextarea">Add Comments to Narrative</label>
-                                    <textarea rows="40" col="8" id="addToNarrative" class="form-control" style="height: 60px;"></textarea>
+                                    <textarea rows="10" col="8" id="addToNarrative" class="form-control" style="height: 100px;" ></textarea>
                                     <br>
                                     <% if (incident.incidentStatus != "Archived") { %>
                                     <a  href="/incident-list/"><button id="addNar" class="btn btn-outline-primary" type="submit" >Save To Narrative</button></a>
@@ -209,7 +208,7 @@ Cathy Da - 301177731
      var titleOrig = document.getElementById("titleI").value;
      var desOrig = document.getElementById("incidentD").value;
      var priority = document.getElementById("priorityS");
-        var priorityOrig = priority.options[priority.selectedIndex].value;
+    var priorityOrig = priority.options[priority.selectedIndex].value;
     var firstOrig = document.getElementById("firstN").value;
     var lastOrig = document.getElementById("lastN").value;
     var emailOrig = document.getElementById("emailA").value;
@@ -237,7 +236,7 @@ document.getElementById("commentInput").placeholder = "Incident Resolution";
 document.getElementById("commentInput").placeholder = "Enter a comment";
     }
 }
-    
+
 function checkForChanges(){
 var d = new Date();
 var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
@@ -247,10 +246,10 @@ var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYe
    }
    if (desOrig != document.getElementById("incidentD").value){
     narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Description change from '" + desOrig + "' to '" + document.getElementById("incidentD").value + "'.";
-   }
+    }
    if (priorityOrig != document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value){
     narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "Priority change from '" + priorityOrig + "' to '" + document.getElementById("priorityS").options[document.getElementById("priorityS").selectedIndex].value + "'."; 
-   }
+    }
    if (firstOrig != document.getElementById("firstN").value) {
     narrativeHistory = narrativeHistory + "\n" + dateString + ":\n" + "First Name change from '" + firstOrig + "' to '" + document.getElementById("firstN").value + "'.";
    }
@@ -268,27 +267,30 @@ var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYe
  //POPULATE NARRATIVE WHEN STATUS CHANGE HAPPENS WITH COMMENT
 function populateNarrative(){
 var select = document.getElementById("ChangeStatus");
-var value = select.options[select.selectedIndex].value;
+var selected = select.options[select.selectedIndex].value;
 var d = new Date();
 var dateString =  d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
-if (selectOrig != value){
-date = mon + '/' + day + '/' + year;
-var comment = "Status change from '" + selectOrig + "' to '" + value +"' ~ Comment: " + document.getElementById("commentInput").value;
+if (selectOrig != selected){
+var comment = "Status change from '" + selectOrig + "' to '" + selected +"' ~ Comment: " + document.getElementById("commentInput").value;
 output =  narrativeHistory + "\n" + dateString + ":\n" + comment;
 document.getElementById("commentInput").value = output;
-document.getElementById("commentBox").style.visibility = "hidden";}
+document.getElementById("commentBox").style.visibility = "hidden";
+
+}
 else {
     document.getElementById("commentInput").value = narrativeHistory;
 }
 
 }
-    document.getElementById("addNar").addEventListener("click", addToNarrative);
+
+document.getElementById("addNar").addEventListener("click", addToNarrative);
 function addToNarrative(){
 var narrativeHistory = document.getElementById("narrativeBox").value;
 var d = new Date();
 var dateString = d.getUTCDate() + "/"+ (d.getUTCMonth()+1) + "/"+ d.getUTCFullYear() + " - " + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds();
 var comment = "Comment: " + document.getElementById("addToNarrative").value;
 output =  narrativeHistory + "\n" + dateString + ":\n" + comment;
+
 document.getElementById("commentInput").value = output;
 document.getElementById("addToNarrative").style.visibility = "hidden";
 }

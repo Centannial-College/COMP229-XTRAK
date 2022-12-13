@@ -35,13 +35,13 @@ router.get('/incident-add', AuthGuard,  DisplayIncidentAddPage);
 router.post('/incident-add', AuthGuard, ProcessIncidentAddPage);
 
 //edit database item and processes them
-router.post('/incident-edit/:id', AuthGuard, ProcessIncidentEditPage);
-router.get('/incident-edit/:id', AuthGuard, DisplayIncidentEditPage);
+router.post('/incident-edit/:id&:recordNumber', AuthGuard, ProcessIncidentEditPage);
+router.get('/incident-edit/:id&:recordNumber', AuthGuard, DisplayIncidentEditPage);
 
 //Display Incident Details page
 router.get('/incident-view/:id', AuthGuard, DisplayIncidentViewPage);
 
 //deletes item from database
-router.get('/incident-delete/:id', AuthGuard, ProcessIncidentDelete);
+router.get('/incident-delete/:id&:recordNumber', AuthGuard, ProcessIncidentDelete);
 
 export default router;

@@ -1,5 +1,5 @@
 /*
-File: config.ejs
+File: logs.js
 Date: 25.11.2022
 
 NAME: xTrak - Incident Reporting
@@ -13,6 +13,19 @@ Tyler Mercier – STUDENT NUM
 Danill Velykyi - 301183618
 Cathy Da - 301177731 
 */
-export const Secret = "MySecret";
-export const MongoURI = "mongodb+srv://XTrak:ByPBTVGTTWipqDEQ@cluster0.fxpwhwv.mongodb.net/?retryWrites=true&w=majority";
-//export const MongoURI = "mongodb+srv://dvelykyi:dvelykyi@cluster0.3psbqhc.mongodb.net/xTrak?retryWrites=true&w=majority"
+
+import mongoose from 'mongoose';
+
+const Schema = mongoose.Schema;
+
+const countersSchema = new Schema({
+    _id: {
+        db: String,
+        coll: String
+    },
+    incidentId: Number,
+}, {
+    collection: 'counters'
+});
+
+export default mongoose.model('Counters', countersSchema);

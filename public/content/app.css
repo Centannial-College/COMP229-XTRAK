@@ -146,12 +146,6 @@ h8 {
   min-width: 100px;
 }
 
-.footer {
-  background-color: #FFF;
-  /*#C8B1E4;*/
-  height: 50px;
-}
-
 .footer a {
   text-decoration: none;
   color: black;
@@ -187,4 +181,19 @@ h8 {
   ;
   color: white;
   height: 45px;
+}
+
+textarea{
+  max-height: 300px;
+}
+footer{
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+}
+
+main{
+  background-color: #8938F7;
+  min-height: 90vh;
 }
